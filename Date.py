@@ -1,9 +1,6 @@
 # A date
 
 class Date:
-    CALENDAR = "Gregorian"
-    FORMAT = "MM/DD/YYYY"
-
     # Constructor
     def __init__(self, year: int, month: int, day: int):
         self.__year = year
