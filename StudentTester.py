@@ -14,6 +14,7 @@ from Date import Date
 from Phone import Phone
 
 def main():
+    #List of Student Info
     Student_List = []
     while True:
         print("Hello and Welcome!Please pick an option by inputting the number assigned to it:")
