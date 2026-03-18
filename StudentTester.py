@@ -75,6 +75,8 @@ def main():
         elif User_Input == 4:
             print("4")
             print()
+
+        #Loop Breaks here
         elif User_Input == 5:
             print("Thank you for using our program!")
             break
