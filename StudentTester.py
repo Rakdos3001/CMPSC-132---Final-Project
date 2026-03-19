@@ -13,77 +13,86 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
+def create_student():
+    """
+    Returns a new Student to be added.
+    """
+
+    # Name Information For Classes
+    name_first = input("Please Enter Your First Name:")
+    name_middle = input("Please Enter Your Middle Name (Type N/A if None):")
+    name_last = input("Please Enter Your Last Name:")
+    student_id = int(input("Please Enter Your Student ID:"))
+    unified_student_info = Person(name_first, name_middle, name_last)
+
+    # Street Info For Classes
+    street_address = input("Please Enter Your Street Address:")
+    city_name = input("Please Enter Your City:")
+    state = input("Please Enter Your State:")
+    zip_code = int(input("Please Enter Your ZIP Code:"))
+    mailing_type = input("What Type of Address do you have?(Permanent,Local,etc.):")
+    unified_mailing_address = MailingAddress(street_address, city_name, state, zip_code, mailing_type)
+
+    # Email Address Info for Classes
+    email_address = input("Please Enter Your Email:")
+    email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
+    unified_email = EmailAddress(email_address, email_type)
+
+    # Phone Number Info for Classes
+    phone_number = input("Please Enter Your Phone Number:")
+    phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
+    unified_phone = Phone(phone_number, phone_type)
+
+    # Birthday Info for Classes
+    birth_month = int(input("Please Enter Your Birth Month:"))
+    birth_day = int(input("Please Enter Your Birth Day:"))
+    birth_year = int(input("Please Enter Your Birth Year:"))
+    unified_birth_day = Date(birth_year, birth_month, birth_day)
+
+    # Enrollment Info for Classes
+    enrollment_date = input("Please Enter Your Enrollment Date (Month/Day/Year):")
+    starting_semester = input("What Semester And Year are you starting in?:")
+    major = input("What's your major?:")
+    unified_extra = Student(student_id, enrollment_date, starting_semester, major)
+
+    return unified_student_info
+
 def main():
     #List of Student Info
-    Student_List = []
+    student_list = []
     while True:
-        print("Hello and Welcome!Please pick an option by inputting the number assigned to it:")
-        print()
-        print("1.Add A Student\n"
-          "2.Edit Student Info\n"
-          "3.Remove Student\n"
-          "4.Display Student\n"
-          "5.Exit\n")
-        User_Input = int(input("Please Enter Your Option:"))
-        if User_Input == 1:
-            #Name Information For Classes
-            Name_First = input("Please Enter Your First Name:")
-            Name_Middle = input("Please Enter Your Middle Name (Type N/A if None):")
-            Name_Last = input("Please Enter Your Last Name:")
-            Student_ID = int(input("Please Enter Your Student ID:"))
-            Unified_Student_Info = Person(Name_First,Name_Middle,Name_Last)
+        print("Hello and Welcome! Please pick an option by inputting the number assigned to it: \n")
+        print(
+            "1.Add A Student\n"
+            "2.Edit Student Info\n"
+            "3.Remove Student\n"
+            "4.Display Student\n"
+            "5.Exit\n"
+        )
+        user_input = int(input("Please Enter Your Option:"))
 
-            #Street Info For Classes
-            Street_Address = input("Please Enter Your Street Address:")
-            City_Name = input("Please Enter Your City:")
-            State = input("Please Enter Your State:")
-            Zip = input("Please Enter Your ZIP Code:")
-            Mailing_Type = input("What Type of Address do you have?(Permanent,Local,etc.):")
-            Unified_MailingAddress = MailingAddress(Street_Address,City_Name,State,Zip,Mailing_Type)
-
-            #Email Address Info for Classes
-            Email_Address = input("Please Enter Your Email:")
-            Email_Type =  input("What Kind Of Email is it?(Academic,Industrial,etc.):")
-            Unified_Email = EmailAddress(Email_Address,Email_Type)
-
-            # Phone Number Info for Classes
-            Phone_Number =  input("Please Enter Your Phone Number:")
-            Phone_Type = input("What Kind Of Phone is it?(Cell,Home,Office):")
-            Unified_Phone = Phone(Phone_Number,Phone_Type)
-
-            # Birthday Info for Classes
-            Birth_Month = input("Please Enter Your Birth Month:")
-            Birth_Day = input("Please Enter Your Birth Day:")
-            Birth_Year = input("Please Enter Your Birth Year:")
-            Unified_BirthDay = Date(Birth_Year,Birth_Month,Birth_Day)
-
-            #Enrollment Info for Classes
-            Enrollment_Date = input("Please Enter Your Enrollment Date (Month/Day/Year):")
-            Starting_Semester = input("What Semester And Year are you starting in?:")
-            Major = input("What's your major?:")
-            Unified_Extra = Student(Student_ID,Enrollment_Date,Starting_Semester,Major)
-
-            Student_List.append(Unified_Student_Info)
+        if user_input == 1:
+            student_list.append(create_student())
             print()
 
-        elif User_Input == 2:
+        elif user_input == 2:
             print("2")
             print()
-        elif User_Input == 3:
+
+        elif user_input == 3:
             print("3")
             print()
-        elif User_Input == 4:
+
+        elif user_input == 4:
             print("4")
             print()
 
         #Loop Breaks here
-        elif User_Input == 5:
+        elif user_input == 5:
             print("Thank you for using our program!")
             break
         else:
             print("Invalid Number. Please Try Again")
-
-
 
 
 if __name__ == '__main__':
