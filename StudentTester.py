@@ -57,23 +57,30 @@ def create_student():
 
     return unified_student_info
 
-def find_student_id(student_id: int, student_list: list[Student]):
+def find_student_id(student_list: list[Student]):
     """
-    Returns the location of a student in student_list, searching by student_id
+    Returns the index of a student in student_list, searching by student_id
+    Returns -1 if index not found
     Used for editing, removing, and displaying
     """
+    target_id = int(input("Enter the id of the student to display: "))
+
     ids = [
         student.get_student_id()
         for student in student_list
     ]
 
-    return ids.index(student_id)
+    try:
+        return ids.index(target_id)
+    except ValueError:
+        print("Student ID not found.")
+        return -1
 
 def main():
     #List of Student Info
     student_list = []
     while True:
-        print("Hello and Welcome! Please pick an option by inputting the number assigned to it: \n")
+        print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
         print(
             "1.Add A Student\n"
             "2.Edit Student Info\n"
@@ -83,21 +90,20 @@ def main():
         )
         user_input = int(input("Please Enter Your Option:"))
 
-        if user_input == 1:
+        if user_input == 1: # Add student
             student_list.append(create_student())
-            print()
 
-        elif user_input == 2:
+        elif user_input == 2: # Edit student
             print("2")
-            print()
 
-        elif user_input == 3:
+        elif user_input == 3: # Remove student
             print("3")
-            print()
 
-        elif user_input == 4:
-            print("4")
-            print()
+        elif user_input == 4: # Display student
+            student_id = find_student_id(student_list)
+
+            if student_id != -1:
+                print(student_list[student_id])
 
         #Loop Breaks here
         elif user_input == 5:
