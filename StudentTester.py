@@ -57,6 +57,18 @@ def create_student():
 
     return unified_student_info
 
+def find_student_id(student_id: int, student_list: list[Student]):
+    """
+    Returns the location of a student in student_list, searching by student_id
+    Used for editing, removing, and displaying
+    """
+    ids = [
+        student.get_student_id()
+        for student in student_list
+    ]
+
+    return ids.index(student_id)
+
 def main():
     #List of Student Info
     student_list = []
