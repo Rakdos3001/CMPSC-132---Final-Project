@@ -1,5 +1,5 @@
 # Unites Email Information
-class EmailAddress(self):
+class EmailAddress:
     #Constructor
     def __init__(self, email:str,email_type:str):
         self.__email = email
