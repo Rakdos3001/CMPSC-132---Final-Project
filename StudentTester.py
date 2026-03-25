@@ -18,13 +18,13 @@ def create_student():
     Returns a new Student to be added.
     """
 
-    # Name Information For Classes
+    # Name
     name_first = input("Enter first name: ")
     name_middle = input("Enter middle name (Type N/A if None): ")
     name_last = input("Enter last name: ")
     student_id = int(input("Enter student ID: "))
 
-    # Street Info For Classes
+    # Street
     street_address = input("Enter street address: ")
     city_name = input("Enter city: ")
     state = input("Enter state: ")
@@ -32,7 +32,7 @@ def create_student():
     mailing_type = input("Enter address type (Permanent, Local, etc): ")
     unified_mailing_address = MailingAddress(street_address, city_name, state, zip_code, mailing_type)
 
-    # Email Address Info for Classes
+    # Email Address
     email_list = []
     while True:
         email_address = input("Enter email address: ")
@@ -45,7 +45,7 @@ def create_student():
         if ending1 != "y":
             break
 
-    # Phone Number Info for Classes
+    # Phone Number
     phone_list = []
     while True:
         phone_number = input("Enter phone number: ")
@@ -58,28 +58,28 @@ def create_student():
         if ending2 != "y":
             break
 
-
-    # birthday Info for Classes
+    # Birthday
     birth_month = int(input("Enter birth month: "))
     birth_day = int(input("Enter birth day: "))
     birth_year = int(input("Enter birth year: "))
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
-    # Enrollment Info for Classes
+    # Enrollment
     enrollment_month = int(input("Enter enrollment month: "))
     enrollment_day = int(input("Enter enrollment day: "))
     enrollment_year = int(input("Enter enrollment year: "))
     unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
 
-    #Semester info for classes
+    # Semester
     starting_semester_month = int(input("Enter starting semester month: "))
     starting_semester_day = int(input("Enter starting Semester day: "))
     starting_semester_year = int(input("Enter starting Semester year: "))
     unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
 
-    #Major info
+    # Major
     major = input("Enter major: ")
 
+    # Creation
     unified_student_info = Student(student_id, name_first,name_last,name_middle,unified_mailing_address,
                                   email_list,phone_list,unified_birth_day,unified_enrollment_date,
                                   unified_starting_semester_date,major)
@@ -97,9 +97,11 @@ def find_student_id(student_list: list[Student]):
         for student in student_list
     ]
 
+    # Display students
     for (index, student_id) in enumerate(ids):
         print(f"{student_id}: {student_list[index].get_name_last()}, {student_list[index].get_name_first()}")
 
+    # Get and validate student
     target_id = int(input("Enter the id of the student: "))
     index = ids.index(target_id)
 
@@ -109,77 +111,85 @@ def find_student_id(student_list: list[Student]):
 
     return index
 
-#Edit Info
+# Edit Info
 def edit_info(student_list: list[Student]):
     index = find_student_id(student_list)
-
     student = student_list[index]
-    print("This Is The Current Student Info")
+
     while True:
+        email_str = "\n\t".join([
+            str(email)
+            for email in student.get_email_addresses()
+        ])
+        phone_str = "\n\t".join([
+            str(phone)
+            for phone in student.get_phones()
+        ])
+
         print(
+            "This Is The Current Student Info\n"
+            
             # Names
-            f"1. First Name: {student.get_name_first()}\n"
-            f"2. Middle Name: {student.get_name_last()}\n"
-            f"3. Last Name: {student.get_name_middle()}\n"
+            f"\t1. First Name: {student.get_name_first()}\n"
+            f"\t2. Middle Name: {student.get_name_last()}\n"
+            f"\t3. Last Name: {student.get_name_middle()}\n"
             
             # Address
-            f"4. Street Address: {student.get_mailing_address().get_street_address()}\n"
-            f"5. City Name: {student.get_mailing_address().get_city()}\n"
-            f"6. State: {student.get_mailing_address().get_state()}\n"
-            f"7. Zip Code: {student.get_mailing_address().get_zip_code()}\n"
-            f"8. Mail Type: {student.get_mailing_address().get_address_type()}\n"
+            f"\t4. Street Address: {student.get_mailing_address().get_street_address()}\n"
+            f"\t5. City Name: {student.get_mailing_address().get_city()}\n"
+            f"\t6. State: {student.get_mailing_address().get_state()}\n"
+            f"\t7. Zip Code: {student.get_mailing_address().get_zip_code()}\n"
+            f"\t8. Mail Type: {student.get_mailing_address().get_address_type()}\n"
             
             # Emails And Phones
-            f'''
-            f"9. Email Addresses: {student.get_email_addresses()}\n"
-            f"10. Phone Numbers: {student.get_phones()}\n"
-            '''
+            f"\t9. Email Addresses: {student.get_email_addresses()}\n"
+            f"\t10. Phone Numbers: {student.get_phones()}\n"
             
             # Misc
-            f"11. Birth Month: {student.get_birth_date().get_month()}\n"
-            f"12. Birth Day: {student.get_birth_date().get_day()}\n"
-            f"13. Birth Year: {student.get_birth_date().get_year()}\n"
+            f"\t11. Birth Month: {student.get_birth_date().get_month()}\n"
+            f"\t12. Birth Day: {student.get_birth_date().get_day()}\n"
+            f"\t13. Birth Year: {student.get_birth_date().get_year()}\n"
             
-            f"14. Enrollment Month: {student.get_acceptance_date().get_month()}\n"
-            f"15. Enrollment Day: {student.get_acceptance_date().get_day()}\n"
-            f"16. Enrollment Year: {student.get_acceptance_date().get_year()}\n"
+            f"\t14. Enrollment Month: {student.get_acceptance_date().get_month()}\n"
+            f"\t15. Enrollment Day: {student.get_acceptance_date().get_day()}\n"
+            f"\t16. Enrollment Year: {student.get_acceptance_date().get_year()}\n"
             
-            f"17. Starting Semester Month: {student.get_semester_start().get_month()}\n"
-            f"18. Starting Semester Day: {student.get_semester_start().get_day()}\n"
-            f"19. Starting Semester Year: {student.get_semester_start().get_year()}\n"
-            f"20. Major: {student.get_major()}\n"
+            f"\t17. Starting Semester Month: {student.get_semester_start().get_month()}\n"
+            f"\t18. Starting Semester Day: {student.get_semester_start().get_day()}\n"
+            f"\t19. Starting Semester Year: {student.get_semester_start().get_year()}\n"
+            f"\t20. Major: {student.get_major()}\n"
             
-            f"21. Exit"
+            f"\t21. Exit"
         )
         user_choice = int(input("Enter the number of the info you'd like to change: "))
 
         #Names
         if user_choice == 1:
-            new_input1 = input("Enter new first name: ")
-            student.set_name_first(new_input1)
+            new_name_first = input("Enter new first name: ")
+            student.set_name_first(new_name_first)
         elif user_choice == 2:
-            new_input2 = input("Enter new last name: ")
-            student.set_name_last(new_input2)
+            new_name_last = input("Enter new last name: ")
+            student.set_name_last(new_name_last)
         elif user_choice == 3:
-            new_input3 = input("Enter new middle name: ")
-            student.set_name_middle(new_input3)
+            new_name_mid = input("Enter new middle name: ")
+            student.set_name_middle(new_name_mid)
 
         # Mailing Address
         elif user_choice == 4:
-            new_input4 = input("Enter new street address: ")
-            student.get_mailing_address().set_street_address(new_input4)
+            new_street_address = input("Enter new street address: ")
+            student.get_mailing_address().set_street_address(new_street_address)
         elif user_choice == 5:
-            new_input5 = input("Enter new city: ")
-            student.get_mailing_address().set_city(new_input5)
+            new_city = input("Enter new city: ")
+            student.get_mailing_address().set_city(new_city)
         elif user_choice == 6:
-            new_input6 = input("Enter new state: ")
-            student.get_mailing_address().set_state(new_input6)
+            new_state = input("Enter new state: ")
+            student.get_mailing_address().set_state(new_state)
         elif user_choice == 7:
-            new_input7 = input("Enter new zip Code: ")
-            student.get_mailing_address().set_zip_code(new_input7)
+            new_zip = input("Enter new ZIP code: ")
+            student.get_mailing_address().set_zip_code(new_zip)
         elif user_choice == 8:
-            new_input8 = input("Enter new address type: ")
-            student.get_mailing_address().set_address_type(new_input8)
+            new_address_type = input("Enter new address type: ")
+            student.get_mailing_address().set_address_type(new_address_type)
 
         # Email and Phone
         elif user_choice == 9:
@@ -240,37 +250,37 @@ def edit_info(student_list: list[Student]):
 
         # Misc
         elif user_choice == 11:
-            new_input13 = input("Enter new birth month: ")
-            student.get_birth_date().set_month(new_input13)
+            new_birth_month = input("Enter new birth month: ")
+            student.get_birth_date().set_month(new_birth_month)
         elif user_choice == 12:
-            new_input14 = input("Enter new birth day: ")
-            student.get_birth_date().set_day(new_input14)
+            new_birth_day = input("Enter new birth day: ")
+            student.get_birth_date().set_day(new_birth_day)
         elif user_choice == 13:
-            new_input15 = input("Enter new birth year: ")
-            student.get_birth_date().set_year(new_input15)
+            new_birth_year = input("Enter new birth year: ")
+            student.get_birth_date().set_year(new_birth_year)
 
         elif user_choice == 14:
-            new_input16 = input("Enter new enrollment month: ")
-            student.get_acceptance_date().set_month(new_input16)
+            new_enroll_month = input("Enter new enrollment month: ")
+            student.get_acceptance_date().set_month(new_enroll_month)
         elif user_choice == 15:
-            new_input17 = input("Enter new enrollment day: ")
-            student.get_acceptance_date().set_day(new_input17)
+            new_enroll_day = input("Enter new enrollment day: ")
+            student.get_acceptance_date().set_day(new_enroll_day)
         elif user_choice == 16:
-            new_input18 = input("Enter new enrollment year: ")
-            student.get_acceptance_date().set_year(new_input18)
+            new_enroll_year = input("Enter new enrollment year: ")
+            student.get_acceptance_date().set_year(new_enroll_year)
 
         elif user_choice == 17:
-            new_input19 = input("Enter new starting semester month: ")
-            student.get_semester_start().set_month(new_input19)
+            new_semester_month = input("Enter new starting semester month: ")
+            student.get_semester_start().set_month(new_semester_month)
         elif user_choice == 18:
-            new_input20 = input("Enter new starting semester day: ")
-            student.get_semester_start().set_month(new_input20)
+            new_semester_day = input("Enter new starting semester day: ")
+            student.get_semester_start().set_month(new_semester_day)
         elif user_choice == 19:
-            new_input21 = input("Enter new starting semester year: ")
-            student.get_semester_start().set_month(new_input21)
+            new_semester_year = input("Enter new starting semester year: ")
+            student.get_semester_start().set_month(new_semester_year)
         elif user_choice == 20:
-            new_input22 = input("Enter new Major: ")
-            student.set_major(new_input22)
+            new_major = input("Enter new major: ")
+            student.set_major(new_major)
 
         elif user_choice == 21:
             break
