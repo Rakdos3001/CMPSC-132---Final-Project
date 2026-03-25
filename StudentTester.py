@@ -36,7 +36,7 @@ def create_student():
     email_list = []
     while True:
         email_address = input("Please Enter Your Email:")
-        email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
+        email_type = input("What Kind Of Email is it? (School, Work, etc.):")
         unified_email = EmailAddress(email_address, email_type)
         email_list.append(unified_email)
         ending1 = input("Do you want to enter another? (Type y/n):")
@@ -47,7 +47,7 @@ def create_student():
     phone_list = []
     while True:
         phone_number = input("Please Enter Your Phone Number:")
-        phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
+        phone_type = input("What Kind Of Phone is it? (Cell,Home,Office):")
         unified_phone = Phone(phone_number, phone_type)
         phone_list.append(unified_phone)
         ending2 = input("Do you want to enter another? (Type y/n):")
@@ -125,27 +125,27 @@ def edit_info(student_list: list[Student]):
             f"7. Zip Code: {student.get_mailing_address().get_zip_code()}\n"
             f"8. Mail Type: {student.get_mailing_address().get_address_type()}\n"
             
-            # Email And Phone
-            '''
-            f"9. Email Address: {}\n"
-            f"10. Email Type: {}\n"
-            f"11. Phone Number: {}\n"
-            f"12. Phone Type: {}\n"
+            # Emails And Phones
+            f'''
+            f"9. Email Addresses: {student.get_email_addresses()}\n"
+            f"10. Phone Numbers: {student.get_phones()}\n"
             '''
             
             # Misc
-            f"13. Birth Month: {student.get_birth_date().get_month()}\n"
-            f"14. Birth Day: {student.get_birth_date().get_day()}\n"
-            f"15. Birth Year: {student.get_birth_date().get_year()}\n"
+            f"11. Birth Month: {student.get_birth_date().get_month()}\n"
+            f"12. Birth Day: {student.get_birth_date().get_day()}\n"
+            f"13. Birth Year: {student.get_birth_date().get_year()}\n"
             
-            f"16. Enrollment Month: {student.get_acceptance_date().get_month()}\n"
-            f"17. Enrollment Day: {student.get_acceptance_date().get_day()}\n"
-            f"18. Enrollment Year: {student.get_acceptance_date().get_year()}\n"
+            f"14. Enrollment Month: {student.get_acceptance_date().get_month()}\n"
+            f"15. Enrollment Day: {student.get_acceptance_date().get_day()}\n"
+            f"16. Enrollment Year: {student.get_acceptance_date().get_year()}\n"
             
-            f"19. Starting Semester Month: {student.get_semester_start().get_month()}\n"
-            f"20. Starting Semester Day: {student.get_semester_start().get_day()}\n"
-            f"21. Starting Semester Year: {student.get_semester_start().get_year()}\n"
-            f"22. Major: {student.get_major()}\n"
+            f"17. Starting Semester Month: {student.get_semester_start().get_month()}\n"
+            f"18. Starting Semester Day: {student.get_semester_start().get_day()}\n"
+            f"19. Starting Semester Year: {student.get_semester_start().get_year()}\n"
+            f"20. Major: {student.get_major()}\n"
+            
+            f"21. Exit"
         )
         user_choice = int(input("Please Enter The Number of the info you'd like to change:"))
 
@@ -179,47 +179,100 @@ def edit_info(student_list: list[Student]):
 
         # Email and Phone
         elif user_choice == 9:
-            pass
+            emails = student.get_email_addresses()
+
+            # Display emails
+            print("Current Emails:")
+            for (index, phone) in enumerate(emails):
+                print(f"\t{index + 1}. {phone}")
+
+            # Menu
+            print(
+                f"1. Add an email \n"
+                f"2. Remove an email \n"
+                f"3. Go back \n"
+            )
+            action = int(input("Select an action: "))
+            match action:
+                case 1:
+                    email_address = input("Enter email address: ")
+                    email_type = input("Enter email type (School, Work, etc): ")
+                    emails.append(EmailAddress(email_address, email_type))
+                case 2:
+                    # Emails are shown as index + 1, so we have to remove -1
+                    remove_index = int(input("Enter number of email to remove: ")) - 1
+                    emails.pop(remove_index)
+                case _:
+                    print("Invalid Action.")
+                    continue
+
         elif user_choice == 10:
-            pass
-        elif user_choice == 11:
-            pass
-        elif user_choice == 12:
-            pass
+            phones = student.get_phones()
+
+            # Display phones
+            print("Current Phones:")
+            for (index, phone) in enumerate(phones):
+                print(f"\t{index + 1}. {phone}")
+
+            # Menu
+            print(
+                f"1. Add a phone \n"
+                f"2. Remove a phone \n"
+                f"3. Go back \n"
+            )
+            action = int(input("Select an action: "))
+            match action:
+                case 1:
+                    phone_number = input("Enter phone number: ")
+                    phone_type = input("Enter phone type (Cell, Home, etc): ")
+                    phones.append(Phone(phone_number, phone_type))
+                case 2:
+                    # Phones are shown as index + 1, so we have to remove -1
+                    remove_index = int(input("Enter number of phone to remove: ")) - 1
+                    phones.pop(remove_index)
+                case _:
+                    print("Invalid Action.")
+                    continue
 
         # Misc
-        elif user_choice == 13:
+        elif user_choice == 11:
             new_input13 = input("Please Enter A New Birth Month:")
             student.get_birth_date().set_month(new_input13)
-        elif user_choice == 14:
+        elif user_choice == 12:
             new_input14 = input("Please Enter A New Birth Day:")
             student.get_birth_date().set_day(new_input14)
-        elif user_choice == 15:
+        elif user_choice == 13:
             new_input15 = input("Please Enter A New Birth Year:")
             student.get_birth_date().set_year(new_input15)
 
-        elif user_choice == 16:
+        elif user_choice == 14:
             new_input16 = input("Please Enter A New Enrollment Month:")
             student.get_acceptance_date().set_month(new_input16)
-        elif user_choice == 17:
+        elif user_choice == 15:
             new_input17 = input("Please Enter A New Enrollment Day:")
             student.get_acceptance_date().set_day(new_input17)
-        elif user_choice == 18:
+        elif user_choice == 16:
             new_input18 = input("Please Enter A New Enrollment Year:")
             student.get_acceptance_date().set_year(new_input18)
 
-        elif user_choice == 19:
+        elif user_choice == 17:
             new_input19 = input("Please Enter A New Starting Semester Month:")
             student.get_semester_start().set_month(new_input19)
-        elif user_choice == 20:
+        elif user_choice == 18:
             new_input20 = input("Please Enter A New Starting Semester Day:")
             student.get_semester_start().set_month(new_input20)
-        elif user_choice == 21:
+        elif user_choice == 19:
             new_input21 = input("Please Enter A New Starting Semester Year:")
             student.get_semester_start().set_month(new_input21)
-        elif user_choice == 22:
+        elif user_choice == 20:
             new_input22 = input("Please Enter A New Major:")
             student.set_major(new_input22)
+
+        elif user_choice == 21:
+            break
+        else:
+            print("Invalid action.")
+            continue
 
 
 def main():
