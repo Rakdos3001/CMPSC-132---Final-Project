@@ -23,7 +23,6 @@ def create_student():
     name_middle = input("Please Enter Your Middle Name (Type N/A if None):")
     name_last = input("Please Enter Your Last Name:")
     student_id = int(input("Please Enter Your Student ID:"))
-    unified_student_info = Person(name_first, name_middle, name_last)
 
     # Street Info For Classes
     street_address = input("Please Enter Your Street Address:")
@@ -34,14 +33,27 @@ def create_student():
     unified_mailing_address = MailingAddress(street_address, city_name, state, zip_code, mailing_type)
 
     # Email Address Info for Classes
-    email_address = input("Please Enter Your Email:")
-    email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
-    unified_email = EmailAddress(email_address, email_type)
+    email_list = []
+    while True:
+        email_address = input("Please Enter Your Email:")
+        email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
+        unified_email = EmailAddress(email_address, email_type)
+        email_list.append(unified_email)
+        ending1 = input("Do you want to enter another? (Type y/n):")
+        if ending1 == "N" or "n":
+            break
 
     # Phone Number Info for Classes
-    phone_number = input("Please Enter Your Phone Number:")
-    phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
-    unified_phone = Phone(phone_number, phone_type)
+    phone_list = []
+    while True:
+        phone_number = input("Please Enter Your Phone Number:")
+        phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
+        unified_phone = Phone(phone_number, phone_type)
+        phone_list.append(unified_phone)
+        ending2 = input("Do you want to enter another? (Type y/n):")
+        if ending2 == "N" or "n":
+            break
+
 
     # Birthday Info for Classes
     birth_month = int(input("Please Enter Your Birth Month:"))
@@ -50,10 +62,23 @@ def create_student():
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
     # Enrollment Info for Classes
-    enrollment_date = input("Please Enter Your Enrollment Date (Month/Day/Year):")
-    starting_semester = input("What Semester And Year are you starting in?:")
+    enrollment_month = int(input("Please Enter Your Enrollment Month:"))
+    enrollment_day = int(input("Please Enter Your Enrollment Day:"))
+    enrollment_year = int(input("Please Enter Your Enrollment Year:"))
+    unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
+
+    #Semester info for classes
+    starting_semester_month = int(input("Please Enter Your Starting Semester Month:"))
+    starting_semester_day = int(input("Please Enter Your Starting Semester Day:"))
+    starting_semester_year = int(input("Please Enter Your Starting Semester Year:"))
+    unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
+
+    #Major info
     major = input("What's your major?:")
-    unified_extra = Student(student_id, enrollment_date, starting_semester, major)
+
+    unified_student_info = Student(student_id, name_first,name_last,name_middle,unified_mailing_address,
+                                  email_list,phone_list,unified_birth_day,unified_enrollment_date,
+                                  unified_starting_semester_date,major)
 
     return unified_student_info
 
@@ -63,7 +88,7 @@ def find_student_id(student_list: list[Student]):
     Returns -1 if index not found
     Used for editing, removing, and displaying
     """
-    target_id = int(input("Enter the id of the student to display: "))
+    target_id = int(input("Enter the id of the student: "))
 
     ids = [
         student.get_student_id()
@@ -76,6 +101,66 @@ def find_student_id(student_list: list[Student]):
         print("Student ID not found.")
         return -1
 
+'''
+def edit_info(student_list: list[Student]):
+    print("This Is The Current Student Info")
+    while True:
+        print("")
+
+    name_first = input("Please Enter Your First Name:")
+    name_middle = input("Please Enter Your Middle Name (Type N/A if None):")
+    name_last = input("Please Enter Your Last Name:")
+    student_id = int(input("Please Enter Your Student ID:"))
+
+    street_address = input("Please Enter Your Street Address:")
+    city_name = input("Please Enter Your City:")
+    state = input("Please Enter Your State:")
+    zip_code = int(input("Please Enter Your ZIP Code:"))
+    mailing_type = input("What Type of Address do you have?(Permanent,Local,etc.):")
+
+    email_list = []
+    while True:
+        email_address = input("Please Enter Your Email:")
+        email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
+        unified_email = EmailAddress(email_address, email_type)
+        email_list.append(unified_email)
+        ending1 = input("Do you want to enter another? (Type y/n):")
+        if ending1 == "N" or "n":
+            break
+
+    # Phone Number Info for Classes
+    phone_list = []
+    while True:
+        phone_number = input("Please Enter Your Phone Number:")
+        phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
+        unified_phone = Phone(phone_number, phone_type)
+        phone_list.append(unified_phone)
+        ending2 = input("Do you want to enter another? (Type y/n):")
+        if ending2 == "N" or "n":
+            break
+
+    # Birthday Info for Classes
+    birth_month = int(input("Please Enter Your Birth Month:"))
+    birth_day = int(input("Please Enter Your Birth Day:"))
+    birth_year = int(input("Please Enter Your Birth Year:"))
+    unified_birth_day = Date(birth_year, birth_month, birth_day)
+
+    # Enrollment Info for Classes
+    enrollment_month = int(input("Please Enter Your Enrollment Month:"))
+    enrollment_day = int(input("Please Enter Your Enrollment Day:"))
+    enrollment_year = int(input("Please Enter Your Enrollment Year:"))
+    unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
+
+    # Semester info for classes
+    starting_semester_month = int(input("Please Enter Your Starting Semester Month:"))
+    starting_semester_day = int(input("Please Enter Your Starting Semester Day:"))
+    starting_semester_year = int(input("Please Enter Your Starting Semester Year:"))
+    unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
+
+    # Major info
+    major = input("What's your major?:")
+
+'''
 def main():
     #List of Student Info
     student_list = []
@@ -94,10 +179,17 @@ def main():
             student_list.append(create_student())
 
         elif user_input == 2: # Edit student
-            print("2")
+            edit = edit_info(student_list)
 
         elif user_input == 3: # Remove student
-            print("3")
+            student_id = find_student_id(student_list)
+            if student_id == -1:
+                print("Student ID not found")
+            else:
+                confirmation = input("Are you sure you wish to delete? (Type Yes/No):")
+                if confirmation == "Yes" or "yes":
+                    student_list.remove(student_list[student_id])
+                    print("Student Successfully Removed")
 
         elif user_input == 4: # Display student
             student_id = find_student_id(student_list)
