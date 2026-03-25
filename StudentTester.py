@@ -72,8 +72,8 @@ def create_student():
 
     # Semester
     starting_semester_month = int(input("Enter starting semester month: "))
-    starting_semester_day = int(input("Enter starting Semester day: "))
-    starting_semester_year = int(input("Enter starting Semester year: "))
+    starting_semester_day = int(input("Enter starting semester day: "))
+    starting_semester_year = int(input("Enter starting semester year: "))
     unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
 
     # Major
@@ -99,17 +99,19 @@ def find_student_id(student_list: list[Student]):
 
     # Display students
     for (index, student_id) in enumerate(ids):
-        print(f"{student_id}: {student_list[index].get_name_last()}, {student_list[index].get_name_first()}")
+        student = student_list[index]
+        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
 
     # Get and validate student
-    target_id = int(input("Enter the id of the student: "))
-    index = ids.index(target_id)
+    while True:
+        try:
+            target_id = int(input("Enter the id of the student: "))
+            index = ids.index(target_id)
 
-    while index == -1:
-        target_id = int(input("ID not found. Enter the id of the student: "))
-        index = ids.index(target_id)
-
-    return index
+            return index
+        except ValueError:
+            print("ID not found.")
+            continue
 
 # Edit Info
 def edit_info(student_list: list[Student]):
@@ -117,11 +119,11 @@ def edit_info(student_list: list[Student]):
     student = student_list[index]
 
     while True:
-        email_str = "\n\t".join([
+        email_str = "\n\t\t".join([
             str(email)
             for email in student.get_email_addresses()
         ])
-        phone_str = "\n\t".join([
+        phone_str = "\n\t\t".join([
             str(phone)
             for phone in student.get_phones()
         ])
@@ -142,8 +144,8 @@ def edit_info(student_list: list[Student]):
             f"\t8. Mail Type: {student.get_mailing_address().get_address_type()}\n"
             
             # Emails And Phones
-            f"\t9. Email Addresses: {student.get_email_addresses()}\n"
-            f"\t10. Phone Numbers: {student.get_phones()}\n"
+            f"\t9. Email Addresses: \n\t{email_str}\n"
+            f"\t10. Phone Numbers: \n\t{phone_str}\n"
             
             # Misc
             f"\t11. Birth Month: {student.get_birth_date().get_month()}\n"
@@ -290,7 +292,7 @@ def edit_info(student_list: list[Student]):
 
 
 def main():
-    #List of Student Info
+    # List of Student Info
     student_list = []
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")

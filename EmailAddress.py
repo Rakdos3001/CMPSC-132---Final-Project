@@ -21,6 +21,6 @@ class EmailAddress:
 
     #String Overload
     def __str__(self):
-        return f"Email: {self.__email}, Email Type: {self.__email_type}"
+        return f"{self.__email} ({self.__email_type})"
 
 
