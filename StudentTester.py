@@ -19,62 +19,66 @@ def create_student():
     """
 
     # Name Information For Classes
-    name_first = input("Please Enter Your First Name:")
-    name_middle = input("Please Enter Your Middle Name (Type N/A if None):")
-    name_last = input("Please Enter Your Last Name:")
-    student_id = int(input("Please Enter Your Student ID:"))
+    name_first = input("Enter first name: ")
+    name_middle = input("Enter middle name (Type N/A if None): ")
+    name_last = input("Enter last name: ")
+    student_id = int(input("Enter student ID: "))
 
     # Street Info For Classes
-    street_address = input("Please Enter Your Street Address:")
-    city_name = input("Please Enter Your City:")
-    state = input("Please Enter Your State:")
-    zip_code = int(input("Please Enter Your ZIP Code:"))
-    mailing_type = input("What Type of Address do you have?(Permanent,Local,etc.):")
+    street_address = input("Enter street address: ")
+    city_name = input("Enter city: ")
+    state = input("Enter state: ")
+    zip_code = int(input("Enter ZIP code: "))
+    mailing_type = input("Enter address type (Permanent, Local, etc): ")
     unified_mailing_address = MailingAddress(street_address, city_name, state, zip_code, mailing_type)
 
     # Email Address Info for Classes
     email_list = []
     while True:
-        email_address = input("Please Enter Your Email:")
-        email_type = input("What Kind Of Email is it? (School, Work, etc.):")
+        email_address = input("Enter email address: ")
+        email_type = input("Enter email type (School, Work, etc.): ")
+
         unified_email = EmailAddress(email_address, email_type)
         email_list.append(unified_email)
-        ending1 = input("Do you want to enter another? (Type y/n):")
-        if ending1 == "n":
+
+        ending1 = input("Do you want to enter another? (Type Y/n): ").lower()
+        if ending1 != "y":
             break
 
     # Phone Number Info for Classes
     phone_list = []
     while True:
-        phone_number = input("Please Enter Your Phone Number:")
-        phone_type = input("What Kind Of Phone is it? (Cell,Home,Office):")
+        phone_number = input("Enter phone number: ")
+        phone_type = input("Enter phone type (Cell, Home, Office): ")
+
         unified_phone = Phone(phone_number, phone_type)
         phone_list.append(unified_phone)
-        ending2 = input("Do you want to enter another? (Type y/n):")
-        if ending2 == "n":
+
+        ending2 = input("Do you want to enter another? (Type Y/n): ").lower()
+        if ending2 != "y":
             break
 
 
-    # Birthday Info for Classes
-    birth_month = int(input("Please Enter Your Birth Month:"))
-    birth_day = int(input("Please Enter Your Birth Day:"))
-    birth_year = int(input("Please Enter Your Birth Year:"))
+    # birthday Info for Classes
+    birth_month = int(input("Enter birth month: "))
+    birth_day = int(input("Enter birth day: "))
+    birth_year = int(input("Enter birth year: "))
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
     # Enrollment Info for Classes
-    enrollment_month = int(input("Please Enter Your Enrollment Month:"))
-    enrollment_day = int(input("Please Enter Your Enrollment Day:"))
-    enrollment_year = int(input("Please Enter Your Enrollment Year:"))
+    enrollment_month = int(input("Enter enrollment month: "))
+    enrollment_day = int(input("Enter enrollment day: "))
+    enrollment_year = int(input("Enter enrollment year: "))
     unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
 
     #Semester info for classes
-    starting_semester_month = int(input("Please Enter Your Starting Semester Month:"))
-    starting_semester_day = int(input("Please Enter Your Starting Semester Day:"))
-    starting_semester_year = int(input("Please Enter Your Starting Semester Year:"))
+    starting_semester_month = int(input("Enter starting semester month: "))
+    starting_semester_day = int(input("Enter starting Semester day: "))
+    starting_semester_year = int(input("Enter starting Semester year: "))
     unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
 
     #Major info
-    major = input("What's your major?:")
+    major = input("Enter major: ")
 
     unified_student_info = Student(student_id, name_first,name_last,name_middle,unified_mailing_address,
                                   email_list,phone_list,unified_birth_day,unified_enrollment_date,
@@ -147,34 +151,34 @@ def edit_info(student_list: list[Student]):
             
             f"21. Exit"
         )
-        user_choice = int(input("Please Enter The Number of the info you'd like to change:"))
+        user_choice = int(input("Enter the number of the info you'd like to change: "))
 
         #Names
         if user_choice == 1:
-            new_input1 = input("Please Enter A New First Name:")
+            new_input1 = input("Enter new first name: ")
             student.set_name_first(new_input1)
         elif user_choice == 2:
-            new_input2 = input("Please Enter A New Last Name:")
+            new_input2 = input("Enter new last name: ")
             student.set_name_last(new_input2)
         elif user_choice == 3:
-            new_input3 = input("Please Enter A New Middle Name:")
+            new_input3 = input("Enter new middle name: ")
             student.set_name_middle(new_input3)
 
         # Mailing Address
         elif user_choice == 4:
-            new_input4 = input("Please Enter A New Street Address:")
+            new_input4 = input("Enter new street address: ")
             student.get_mailing_address().set_street_address(new_input4)
         elif user_choice == 5:
-            new_input5 = input("Please Enter A New City:")
+            new_input5 = input("Enter new city: ")
             student.get_mailing_address().set_city(new_input5)
         elif user_choice == 6:
-            new_input6 = input("Please Enter A New State:")
+            new_input6 = input("Enter new state: ")
             student.get_mailing_address().set_state(new_input6)
         elif user_choice == 7:
-            new_input7 = input("Please Enter A New Zip Code:")
+            new_input7 = input("Enter new zip Code: ")
             student.get_mailing_address().set_zip_code(new_input7)
         elif user_choice == 8:
-            new_input8 = input("Please Enter A New Address Type:")
+            new_input8 = input("Enter new address type: ")
             student.get_mailing_address().set_address_type(new_input8)
 
         # Email and Phone
@@ -182,7 +186,7 @@ def edit_info(student_list: list[Student]):
             emails = student.get_email_addresses()
 
             # Display emails
-            print("Current Emails:")
+            print("Current Emails: ")
             for (index, phone) in enumerate(emails):
                 print(f"\t{index + 1}. {phone}")
 
@@ -210,7 +214,7 @@ def edit_info(student_list: list[Student]):
             phones = student.get_phones()
 
             # Display phones
-            print("Current Phones:")
+            print("Current Phones: ")
             for (index, phone) in enumerate(phones):
                 print(f"\t{index + 1}. {phone}")
 
@@ -236,36 +240,36 @@ def edit_info(student_list: list[Student]):
 
         # Misc
         elif user_choice == 11:
-            new_input13 = input("Please Enter A New Birth Month:")
+            new_input13 = input("Enter new birth month: ")
             student.get_birth_date().set_month(new_input13)
         elif user_choice == 12:
-            new_input14 = input("Please Enter A New Birth Day:")
+            new_input14 = input("Enter new birth day: ")
             student.get_birth_date().set_day(new_input14)
         elif user_choice == 13:
-            new_input15 = input("Please Enter A New Birth Year:")
+            new_input15 = input("Enter new birth year: ")
             student.get_birth_date().set_year(new_input15)
 
         elif user_choice == 14:
-            new_input16 = input("Please Enter A New Enrollment Month:")
+            new_input16 = input("Enter new enrollment month: ")
             student.get_acceptance_date().set_month(new_input16)
         elif user_choice == 15:
-            new_input17 = input("Please Enter A New Enrollment Day:")
+            new_input17 = input("Enter new enrollment day: ")
             student.get_acceptance_date().set_day(new_input17)
         elif user_choice == 16:
-            new_input18 = input("Please Enter A New Enrollment Year:")
+            new_input18 = input("Enter new enrollment year: ")
             student.get_acceptance_date().set_year(new_input18)
 
         elif user_choice == 17:
-            new_input19 = input("Please Enter A New Starting Semester Month:")
+            new_input19 = input("Enter new starting semester month: ")
             student.get_semester_start().set_month(new_input19)
         elif user_choice == 18:
-            new_input20 = input("Please Enter A New Starting Semester Day:")
+            new_input20 = input("Enter new starting semester day: ")
             student.get_semester_start().set_month(new_input20)
         elif user_choice == 19:
-            new_input21 = input("Please Enter A New Starting Semester Year:")
+            new_input21 = input("Enter new starting semester year: ")
             student.get_semester_start().set_month(new_input21)
         elif user_choice == 20:
-            new_input22 = input("Please Enter A New Major:")
+            new_input22 = input("Enter new Major: ")
             student.set_major(new_input22)
 
         elif user_choice == 21:
@@ -287,7 +291,7 @@ def main():
             "4.Display Student\n"
             "5.Exit\n"
         )
-        user_input = int(input("Please Enter Your Option:"))
+        user_input = int(input("Enter Option: "))
 
         if user_input == 1: # Add student
             student_list.append(create_student())
@@ -297,7 +301,7 @@ def main():
 
         elif user_input == 3: # Remove student
             student_index = find_student_id(student_list)
-            confirmation = input("Are you sure you wish to delete? (Type Yes/No):").lower()
+            confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
             if confirmation == "yes":
                 student_list.remove(student_list[student_index])
                 print("Student Successfully Removed")
