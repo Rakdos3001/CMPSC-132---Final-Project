@@ -16,11 +16,11 @@ class EmailAddress:
     def set_email_type(self, new_email_type:str):
         self.__email_type = new_email_type
 
-    def get_email(self):
+    def get_email_type(self):
         return self.__email_type
 
     #String Overload
     def __str__(self):
-        return (f"Email: {self.__email}, Email Type: {self.__email_type}")
+        return f"Email: {self.__email}, Email Type: {self.__email_type}"
 
 
