@@ -43,4 +43,4 @@ class MailingAddress:
 
     # String overload
     def __str__(self):
-        return f"{self.__street_address}, {self.__city}, {self.__state} {self.__zip} ({self.__address_type}"
+        return f"{self.__street_address}, {self.__city}, {self.__state} {self.__zip} ({self.__address_type})"

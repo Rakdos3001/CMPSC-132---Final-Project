@@ -73,7 +73,7 @@ class Person:
 
         return (
             f"{self.__name_last}, {self.__name_first} {self.__name_middle}: \n"
-            f"DOB: {self.__birth_date}"
+            f"\tDOB: {self.__birth_date}\n"
             f"\tAddress: {self.__mailing_address} \n"
             
             f"\tEmails: \n"

@@ -88,12 +88,15 @@ def find_student_id(student_list: list[Student]):
     Returns -1 if index not found
     Used for editing, removing, and displaying
     """
-    target_id = int(input("Enter the id of the student: "))
-
     ids = [
         student.get_student_id()
         for student in student_list
     ]
+
+    for (index, student_id) in enumerate(ids):
+        print(f"{student_id}: {student_list[index].get_name_last()}, {student_list[index].get_name_first()}")
+
+    target_id = int(input("Enter the id of the student: "))
 
     try:
         return ids.index(target_id)
@@ -232,20 +235,20 @@ def main():
             edit = edit_info(student_list)
 
         elif user_input == 3: # Remove student
-            student_id = find_student_id(student_list)
-            if student_id == -1:
+            student_index = find_student_id(student_list)
+            if student_index == -1:
                 print("Student ID not found")
             else:
                 confirmation = input("Are you sure you wish to delete? (Type Yes/No):")
                 if confirmation == "Yes" or "yes":
-                    student_list.remove(student_list[student_id])
+                    student_list.remove(student_list[student_index])
                     print("Student Successfully Removed")
 
         elif user_input == 4: # Display student
-            student_id = find_student_id(student_list)
+            student_index = find_student_id(student_list)
 
-            if student_id != -1:
-                print(student_list[student_id])
+            if student_index != -1:
+                print(student_list[student_index])
 
         #Loop Breaks here
         elif user_input == 5:

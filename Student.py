@@ -41,3 +41,12 @@ class Student(Person):
 
 	def get_major(self):
 		return self.__major
+
+	def __str__(self):
+		return (
+        	Person.__str__(self) + "\n"
+			f"\tStudent ID: {self.__student_id}\n"
+			f"\tAcceptance Date: {self.__acceptance_date}\n"
+			f"\tSemester Starts: {self.__semester_start}\n"
+			f"\tMajor: {self.__major}\n"
+        )
