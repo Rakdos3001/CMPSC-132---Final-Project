@@ -533,11 +533,9 @@ This Is The Current Student Info
 Enter the number of the info you'd like to change: 8
 Major: Art
 
-1. Exit
 Enter new major or 1 to exit: History
 Major: History
 
-1. Exit
 Enter new major or 1 to exit: 1
 This Is The Current Student Info
 
