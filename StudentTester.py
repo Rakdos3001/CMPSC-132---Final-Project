@@ -13,7 +13,7 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
-
+#Displays list of students and then asks user to enter id to show
 def find_student_id(student_list: list[Student]):
     """
     Returns the index of a student in student_list, searching by student_id
@@ -41,7 +41,7 @@ def find_student_id(student_list: list[Student]):
             print("ID not found.")
             continue
 
-
+#Function to create student information. Includes sending to other classes
 def create_student():
     """
     Returns a new Student to be added.
@@ -115,7 +115,7 @@ def create_student():
 
     return unified_student_info
 
-
+#Function in order to edit info
 def edit_info(student_list: list[Student]):
     index = find_student_id(student_list)
     student = student_list[index]
@@ -130,6 +130,7 @@ def edit_info(student_list: list[Student]):
             for phone in student.get_phones()
         ])
 
+#List of current info to be updated
         print(
             "This Is The Current Student Info\n"
 
@@ -167,7 +168,7 @@ def edit_info(student_list: list[Student]):
         )
         user_choice = int(input("Enter the number of the info you'd like to change: "))
 
-        # Names
+        # Choices for user to update
         if user_choice == 1:
             new_name_first = input("Enter new first name: ")
             student.set_name_first(new_name_first)
@@ -252,7 +253,7 @@ def edit_info(student_list: list[Student]):
                     print("Invalid Action.")
                     continue
 
-        # Misc
+        # Misc choices for user to update
         elif user_choice == 11:
             new_birth_month = input("Enter new birth month: ")
             student.get_birth_date().set_month(new_birth_month)
@@ -292,7 +293,7 @@ def edit_info(student_list: list[Student]):
             print("Invalid action.")
             continue
 
-
+#Removes student based on id entered
 def remove_student(student_list: list[Student]):
     student_index = find_student_id(student_list)
     confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
@@ -300,7 +301,7 @@ def remove_student(student_list: list[Student]):
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
 
-
+#Displays info based on student id
 def display_student(student_list: list[Student]):
     student_index = find_student_id(student_list)
     print(student_list[student_index])
@@ -343,3 +344,168 @@ def main():
 if __name__ == '__main__':
     main()
 
+'''
+/usr/local/bin/python3.13 /Users/joaodias/Desktop/CMPSC-132---Final-Project/Paste/StudentTester.py 
+
+Hello and Welcome! Please pick an option by inputting the number assigned to it: 
+
+1.Add A Student
+2.Edit Student Info
+3.Remove Student
+4.Display Student
+5.Exit
+
+Enter Option: 1
+Enter first name: Joao
+Enter middle name (Type N/A if None): Pedro
+Enter last name: Dias
+Enter student ID: 12345
+Enter street address: 804 Shadebrush Ridge
+Enter city: West Chester
+Enter state: PA
+Enter ZIP code: 19382
+Enter address type (Permanent, Local, etc): Local
+Enter email address: EmailExample@100
+Enter email type (School, Work, etc.): School
+Do you want to enter another? (Type Y/n): y
+Enter email address: EmailExample@200
+Enter email type (School, Work, etc.): Work
+Do you want to enter another? (Type Y/n): n
+Enter phone number: 646-644-7777
+Enter phone type (Cell, Home, Office): Cell
+Do you want to enter another? (Type Y/n): y
+Enter phone number: 999-999-9999
+Enter phone type (Cell, Home, Office): Home
+Do you want to enter another? (Type Y/n): n
+Enter birth month (Just Numbers, No Words): 9
+Enter birth day: 19
+Enter birth year: 2000
+Enter enrollment month (Just Numbers, No Words): 8
+Enter enrollment day: 19
+Enter enrollment year: 2021
+Enter starting semester month (Just Numbers, No Words): 11
+Enter starting semester day: 11
+Enter starting semester year: 2022
+Enter major: History
+
+Hello and Welcome! Please pick an option by inputting the number assigned to it: 
+
+1.Add A Student
+2.Edit Student Info
+3.Remove Student
+4.Display Student
+5.Exit
+
+Enter Option: 4
+12345: Dias, Joao Pedro
+Enter the id of the student: 12345
+Dias, Joao Pedro: 
+	DOB: 9/19/2000
+	Address: 804 Shadebrush Ridge, West Chester, PA 19382 (Local) 
+	Emails: 
+		EmailExample@100 (School)
+		EmailExample@200 (Work) 
+	Phones: 
+		646-644-7777 (Cell)
+		999-999-9999 (Home) 
+
+	Student ID: 12345
+	Acceptance Date: 8/19/2021
+	Semester Starts: 11/11/2022
+	Major: History
+
+
+Hello and Welcome! Please pick an option by inputting the number assigned to it: 
+
+1.Add A Student
+2.Edit Student Info
+3.Remove Student
+4.Display Student
+5.Exit
+
+Enter Option: 2
+12345: Dias, Joao Pedro
+Enter the id of the student: 12345
+This Is The Current Student Info
+	1. First Name: Joao
+	2. Middle Name: Dias
+	3. Last Name: Pedro
+	4. Street Address: 804 Shadebrush Ridge
+	5. City Name: West Chester
+	6. State: PA
+	7. Zip Code: 19382
+	8. Mail Type: Local
+	9. Email Addresses: 
+	EmailExample@100 (School)
+		EmailExample@200 (Work)
+	10. Phone Numbers: 
+	646-644-7777 (Cell)
+		999-999-9999 (Home)
+	11. Birth Month: 9
+	12. Birth Day: 19
+	13. Birth Year: 2000
+	14. Enrollment Month: 8
+	15. Enrollment Day: 19
+	16. Enrollment Year: 2021
+	17. Starting Semester Month: 11
+	18. Starting Semester Day: 11
+	19. Starting Semester Year: 2022
+	20. Major: History
+	21. Exit
+Enter the number of the info you'd like to change: 11
+Enter new birth month: 3
+This Is The Current Student Info
+	1. First Name: Joao
+	2. Middle Name: Dias
+	3. Last Name: Pedro
+	4. Street Address: 804 Shadebrush Ridge
+	5. City Name: West Chester
+	6. State: PA
+	7. Zip Code: 19382
+	8. Mail Type: Local
+	9. Email Addresses: 
+	EmailExample@100 (School)
+		EmailExample@200 (Work)
+	10. Phone Numbers: 
+	646-644-7777 (Cell)
+		999-999-9999 (Home)
+	11. Birth Month: 3
+	12. Birth Day: 19
+	13. Birth Year: 2000
+	14. Enrollment Month: 8
+	15. Enrollment Day: 19
+	16. Enrollment Year: 2021
+	17. Starting Semester Month: 11
+	18. Starting Semester Day: 11
+	19. Starting Semester Year: 2022
+	20. Major: History
+	21. Exit
+Enter the number of the info you'd like to change: 21
+
+Hello and Welcome! Please pick an option by inputting the number assigned to it: 
+
+1.Add A Student
+2.Edit Student Info
+3.Remove Student
+4.Display Student
+5.Exit
+
+Enter Option: 3
+12345: Dias, Joao Pedro
+Enter the id of the student: 12345
+Are you sure you wish to delete? (Type Yes/No): yes
+Student Successfully Removed
+
+Hello and Welcome! Please pick an option by inputting the number assigned to it: 
+
+1.Add A Student
+2.Edit Student Info
+3.Remove Student
+4.Display Student
+5.Exit
+
+Enter Option: 5
+Thank you for using our program!
+
+Process finished with exit code 0
+'''
