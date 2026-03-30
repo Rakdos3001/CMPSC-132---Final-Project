@@ -13,7 +13,7 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
-#Displays list of students and then asks user to enter id to show
+# Functions
 def find_student_id(student_list: list[Student]):
     """
     Returns the index of a student in student_list, searching by student_id
@@ -41,10 +41,9 @@ def find_student_id(student_list: list[Student]):
             print("ID not found.")
             continue
 
-#Function to create student information. Includes sending to other classes
 def create_student():
     """
-    Returns a new Student to be added.
+    Creates and returns a new Student to be added.
     """
 
     # Name
@@ -115,8 +114,10 @@ def create_student():
     print("Student Added Successfully")
     return unified_student_info
 
-
 def example_students():
+    """
+    Statically creates and returns two example students for easy testing
+    """
     unified_birth_day_example = Date(2006, 12, 11)
     unified_enrollment_date_example = Date(2010, 1, 15)
     unified_starting_semester_date_example = Date(2020, 11, 9)
@@ -137,11 +138,196 @@ def example_students():
                                    email_list_example, phone_list_example, unified_birth_day_example, unified_enrollment_date_example,
                                    unified_starting_semester_date_example, "History")
 
-    return example_student1,example_student2
+    return example_student1, example_student2
 
+def remove_student(student_list: list[Student]):
+    """
+    Gets a student ID and removes that student from student_list
+    """
+    student_index = find_student_id(student_list)
+    confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
+    if confirmation == "yes":
+        student_list.remove(student_list[student_index])
+        print("Student Successfully Removed")
 
-#Function in order to edit info
+def display_student(student_list: list[Student]):
+    """
+    Displays the information of a student in student_list
+    """
+    student_index = find_student_id(student_list)
+    print(student_list[student_index])
+
+# Functions for editing
+def edit_name(student: Student):
+    """
+    Smaller function for editing student names
+    """
+
+    while True:
+        print(
+            "\n"
+            f"1. First Name: {student.get_name_first()}\n"
+            f"2. Middle Name: {student.get_name_middle()}\n"
+            f"3. Last Name: {student.get_name_last()}\n"
+            f"4. Exit\n"
+        )
+        new_input = int(input("Enter the number of the name you'd like to change: "))
+        if new_input == 1:
+            new_name_first = input("Enter New First name: ")
+            student.set_name_first(new_name_first)
+        elif new_input == 2:
+            new_name_middle = input("Enter New Middle name: ")
+            student.set_name_middle(new_name_middle)
+        elif new_input == 3:
+            new_name_last = input("Enter New last name: ")
+            student.set_name_last(new_name_last)
+        elif new_input == 4:
+            break
+
+def edit_address(student: Student):
+    """
+    Smaller function for editing student addresses
+    """
+
+    while True:
+        print(
+            f"\n"
+            f"1. Street Address: {student.get_mailing_address().get_street_address()}\n"
+            f"2. City: {student.get_mailing_address().get_city()}\n"
+            f"3. State: {student.get_mailing_address().get_state()}\n"
+            f"4. Zip Code: {student.get_mailing_address().get_zip_code()}\n"
+            f"5. Address Type: {student.get_mailing_address().get_address_type()}\n"
+            f"6. Exit"
+        )
+        new_input = int(input("Enter the number of the address you'd like to change: "))
+        if new_input == 1:
+            new_street_address = input("Enter new street address: ")
+            student.get_mailing_address().set_street_address(new_street_address)
+        elif new_input == 2:
+            new_city = input("Enter new city: ")
+            student.get_mailing_address().set_city(new_city)
+        elif new_input == 3:
+            new_state = input("Enter new state: ")
+            student.get_mailing_address().set_state(new_state)
+        elif new_input == 4:
+            new_zip = input("Enter new ZIP code: ")
+            student.get_mailing_address().set_zip_code(new_zip)
+        elif new_input == 5:
+            new_address_type = input("Enter new address type: ")
+            student.get_mailing_address().set_address_type(new_address_type)
+        elif new_input == 6:
+            break
+
+def edit_emails(student: Student):
+    """
+    Smaller function for editing student emails
+    """
+    while True:
+        emails = student.get_email_addresses()
+
+        # Display emails
+        print("Current Emails: ")
+        for (index, phone) in enumerate(emails):
+            print(f"\t{index + 1}. {phone}")
+
+        # Menu
+        print(
+            f"1. Add an email \n"
+            f"2. Remove an email \n"
+            f"3. Exit \n"
+        )
+        action = int(input("Select an action: "))
+        match action:
+            case 1:
+                email_address = input("Enter email address: ")
+                email_type = input("Enter email type (School, Work, etc): ")
+                emails.append(EmailAddress(email_address, email_type))
+            case 2:
+                # Emails are shown as index + 1, so we have to remove -1
+                remove_index = int(input("Enter number of email to remove: ")) - 1
+                emails.pop(remove_index)
+            case 3:
+                break
+            case _:
+                print("Invalid Action.")
+                continue
+
+def edit_phones(student: Student):
+    """
+    Smaller function for editing student phones
+    """
+    while True:
+        phones = student.get_phones()
+
+        # Display phones
+        print("Current Phones: ")
+        for (index, phone) in enumerate(phones):
+            print(f"\t{index + 1}. {phone}")
+
+        # Menu
+        print(
+            f"1. Add a phone \n"
+            f"2. Remove a phone \n"
+            f"3. Exit \n"
+        )
+        action = int(input("Select an action: "))
+        match action:
+            case 1:
+                phone_number = input("Enter phone number: ")
+                phone_type = input("Enter phone type (Cell, Home, etc): ")
+                phones.append(Phone(phone_number, phone_type))
+            case 2:
+                # Phones are shown as index + 1, so we have to remove -1
+                remove_index = int(input("Enter number of phone to remove: ")) - 1
+                phones.pop(remove_index)
+            case 3:
+                break
+            case _:
+                print("Invalid Action.")
+                continue
+
+def edit_date(date: Date, date_type: str):
+    """
+    Smaller function for editing dates
+    """
+    while True:
+        print(
+            f"\n"
+            f"1. {date_type} Month: {date.get_month()}\n"
+            f"2. {date_type} Day: {date.get_day()}\n"
+            f"3. {date_type} Year: {date.get_year()}\n"
+            f"4. Exit"
+        )
+        new_input = int(input("Enter the number of the birthday info you'd like to change: "))
+        if new_input == 1:
+            new_month = int(input("Enter new birth month: "))
+            date.set_month(new_month)
+        elif new_input == 2:
+            new_day = int(input("Enter new birth day: "))
+            date.set_day(new_day)
+        elif new_input == 3:
+            new_year = int(input("Enter new birth year: "))
+            date.set_year(new_year)
+        elif new_input == 4:
+            break
+
+def edit_major(student: Student):
+    """
+    Smaller function for editing student majors
+    """
+    while True:
+        print(f"Major: {student.get_major()}\n")
+        new_major = input("Enter new major or 1 to exit: ")
+        if new_major == "1":
+            break
+        else:
+            student.set_major(new_major)
+
 def edit_info(student_list: list[Student]):
+    """
+    Allows for editing of all student info
+    """
+    # Gets student to update
     index = find_student_id(student_list)
     student = student_list[index]
 
@@ -155,242 +341,65 @@ def edit_info(student_list: list[Student]):
             for phone in student.get_phones()
         ])
 
-#List of current info to be updated
+        # Lists current information that can be updated
         print(
-            "This Is The Current Student Info\n")
+            "This Is The Current Student Info:\n"
             # Name
-        print(
-            f"1. Name: {student.get_name_first()} {student.get_name_middle()},{student.get_name_last()} \n"
+            f"\t1. Name: {student.get_name_first()} {student.get_name_middle()},{student.get_name_last()} \n"
             
-            #Address
-            f"2. Address: {student.get_mailing_address().get_street_address()}, {student.get_mailing_address().get_city()}, {student.get_mailing_address().get_state()} {student.get_mailing_address().get_zip_code()} ({student.get_mailing_address().get_address_type()})\n"
-           
+            # Address
+            f"\t2. Address: {str(student.get_mailing_address())}\n"
+
             # Emails And Phones
             f"\t3. Email Addresses: \n\t{email_str}\n"
-            
             f"\t4. Phone Numbers: \n\t{phone_str}\n"
-            
 
-            #Dates
-            f"5. Birthday:{student.get_birth_date().get_month()}/{student.get_birth_date().get_day()}/{student.get_birth_date().get_year()}\n"
-            
-            f"6. Enrollment Date: {student.get_acceptance_date().get_month()}/{student.get_acceptance_date().get_day()}/{student.get_acceptance_date().get_year()}\n"
-            
-            f"7. Starting Semester: {student.get_semester_start().get_month()}/{student.get_semester_start().get_day()}/{student.get_semester_start().get_year()}\n"
-            
-            f"8. Major: {student.get_major()}\n"
-            
-            f"9. Exit"
+            # Dates
+            f"\t5. Birthday: {student.get_birth_date()}\n"
+            f"\t6. Enrollment Date: {student.get_acceptance_date()}\n"
+            f"\t7. Starting Semester: {student.get_semester_start()}\n"
+                        
+            f"\t8. Major: {student.get_major()}\n"
+            f"\t9. Exit"
         )
         user_choice = int(input("Enter the number of the info you'd like to change: "))
 
         # Choices for user to update
-        #Adds loops so user can do it repeadetly without leaving
+        # Adds loops so user can do it repeatedly without leaving
         if user_choice == 1:
-            while True:
-                print()
-                print(f"1. First Name: {student.get_name_first()}\n"
-                      f"2. Middle Name: {student.get_name_middle()}\n"
-                      f"3. Last Name: {student.get_name_last()}\n"
-                      f"4. Exit\n")
-                new_input = int(input("Enter the number of the name you'd like to change: "))
-                if new_input == 1:
-                    new_name_first = input("Enter New First name: ")
-                    student.set_name_first(new_name_first)
-                elif new_input == 2:
-                    new_name_middle = input("Enter New Middle name: ")
-                    student.set_name_middle(new_name_middle)
-                elif new_input == 3:
-                    new_name_first = input("Enter New last name: ")
-                    student.set_name_last(new_name_last)
-                elif new_input == 4:
-                    break
-
+            edit_name(student)
 
         elif user_choice == 2:
-            while True:
-                print()
-                print(f"1. Street Address: {student.get_mailing_address().get_street_address()}\n"
-                      f"2. City: {student.get_mailing_address().get_city()}\n"
-                      f"3. State: {student.get_mailing_address().get_state()}\n"
-                      f"4. Zip Code: {student.get_mailing_address().get_zip_code()}\n"
-                      f"5. Address Type: {student.get_mailing_address().get_address_type()}\n"
-                      f"6. Exit")
-                new_input = int(input("Enter the number of the address you'd like to change: "))
-                if new_input == 1:
-                    new_street_address = input("Enter new street address: ")
-                    student.get_mailing_address().set_street_address(new_street_address)
-                elif new_input == 2:
-                    new_city = input("Enter new city: ")
-                    student.get_mailing_address().set_city(new_city)
-                elif new_input == 3:
-                    new_state = input("Enter new state: ")
-                    student.get_mailing_address().set_state(new_state)
-                elif new_input == 4:
-                    new_zip = input("Enter new ZIP code: ")
-                    student.get_mailing_address().set_zip_code(new_zip)
-                elif new_input == 5:
-                    new_address_type = input("Enter new address type: ")
-                    student.get_mailing_address().set_address_type(new_address_type)
-                elif new_input == 6:
-                    break
-
+            edit_address(student)
 
         # Email and Phone
         elif user_choice == 3:
-            while True:
-                emails = student.get_email_addresses()
-
-                # Display emails
-                print("Current Emails: ")
-                for (index, phone) in enumerate(emails):
-                    print(f"\t{index + 1}. {phone}")
-
-                # Menu
-                print(
-                    f"1. Add an email \n"
-                    f"2. Remove an email \n"
-                    f"3. Exit \n"
-                )
-                action = int(input("Select an action: "))
-                match action:
-                    case 1:
-                        email_address = input("Enter email address: ")
-                        email_type = input("Enter email type (School, Work, etc): ")
-                        emails.append(EmailAddress(email_address, email_type))
-                    case 2:
-                        # Emails are shown as index + 1, so we have to remove -1
-                        remove_index = int(input("Enter number of email to remove: ")) - 1
-                        emails.pop(remove_index)
-                    case 3:
-                        break
-                    case _:
-                        print("Invalid Action.")
-                        continue
+            edit_emails(student)
 
         elif user_choice == 4:
-            while True:
-                phones = student.get_phones()
-
-                # Display phones
-                print("Current Phones: ")
-                for (index, phone) in enumerate(phones):
-                    print(f"\t{index + 1}. {phone}")
-
-                # Menu
-                print(
-                    f"1. Add a phone \n"
-                    f"2. Remove a phone \n"
-                    f"3. Exit \n"
-                )
-                action = int(input("Select an action: "))
-                match action:
-                    case 1:
-                        phone_number = input("Enter phone number: ")
-                        phone_type = input("Enter phone type (Cell, Home, etc): ")
-                        phones.append(Phone(phone_number, phone_type))
-                    case 2:
-                        # Phones are shown as index + 1, so we have to remove -1
-                        remove_index = int(input("Enter number of phone to remove: ")) - 1
-                        phones.pop(remove_index)
-                    case 3:
-                        break
-                    case _:
-                        print("Invalid Action.")
-                        continue
+            edit_phones(student)
 
         # Misc choices for user to update
         elif user_choice == 5:
-            while True:
-                print()
-                print(f"1. Birthday Month: {student.get_birth_date().get_month()}\n"
-                      f"2. Birthday Day: {student.get_birth_date().get_day()}\n"
-                      f"3. Birthday Year: {student.get_birth_date().get_year()}\n"
-                      f"4. Exit")
-                new_input = int(input("Enter the number of the birthday info you'd like to change: "))
-                if new_input == 1:
-                    new_birth_month = input("Enter new birth month: ")
-                    student.get_birth_date().set_month(new_birth_month)
-                elif new_input == 2:
-                    new_birth_day = input("Enter new birth day: ")
-                    student.get_birth_date().set_day(new_birth_day)
-                elif new_input == 3:
-                    new_birth_year = input("Enter new birth year: ")
-                    student.get_birth_date().set_year(new_birth_year)
-                elif new_input == 4:
-                    break
-
+            edit_date(student.get_birth_date(), "Birth")
 
         elif user_choice == 6:
-            while True:
-                print()
-                print(f"1. Enrollment Month: {student.get_acceptance_date().get_month()}\n"
-                      f"2. Enrollment Day: {student.get_acceptance_date().get_day()}\n"
-                      f"3. Enrollment Year: {student.get_acceptance_date().get_year()}\n"
-                      f"4. Exit")
-                new_input = int(input("Enter the number of enrollment info you'd like to change: "))
-                if new_input == 1:
-                    new_enroll_month = input("Enter new enrollment month: ")
-                    student.get_acceptance_date().set_month(new_enroll_month)
-                elif new_input == 2:
-                    new_enroll_day = input("Enter new enrollment day: ")
-                    student.get_acceptance_date().set_day(new_enroll_day)
-                elif new_input == 3:
-                    new_enroll_year = input("Enter new enrollment year: ")
-                    student.get_acceptance_date().set_year(new_enroll_year)
-                elif new_input == 4:
-                    break
+            edit_date(student.get_acceptance_date(), "Enrollment")
 
         elif user_choice == 7:
-            while True:
-                print()
-                print(f"1. Starting Semester Month: {student.get_semester_start().get_month()}\n"
-                      f"2. Starting Semester Day: {student.get_semester_start().get_day()}\n"
-                      f"3. Starting Semester Year: {student.get_semester_start().get_year()}\n"
-                      f"4. Exit")
-                new_input = int(input("Enter the number of semester info you'd like to change: "))
-                if new_input == 1:
-                    new_semester_month = input("Enter new starting semester month: ")
-                    student.get_semester_start().set_month(new_semester_month)
-                elif new_input == 2:
-                    new_semester_day = input("Enter new starting semester day: ")
-                    student.get_semester_start().set_month(new_semester_day)
-                elif new_input == 3:
-                    new_semester_year = input("Enter new starting semester year: ")
-                    student.get_semester_start().set_month(new_semester_year)
-                elif new_input == 4:
-                    break
+            edit_date(student.get_semester_start(), "Semester Start")
 
         elif user_choice == 8:
-            while True:
-                print(f"Major: {student.get_major()}\n")
-                new_major = input("Enter new major or 1 to exit: ")
-                if new_major == "1":
-                    break
-                else:
-                    student.set_major(new_major)
+            edit_major(student)
 
         elif user_choice == 9:
-          print("Edits Successfully Implemented")
-          break
+            print("Edits Successfully Implemented")
+            break
         else:
             print("Invalid action.")
             continue
 
-#Removes student based on id entered
-def remove_student(student_list: list[Student]):
-    student_index = find_student_id(student_list)
-    confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
-    if confirmation == "yes":
-        student_list.remove(student_list[student_index])
-        print("Student Successfully Removed")
-
-#Displays info based on student id
-def display_student(student_list: list[Student]):
-    student_index = find_student_id(student_list)
-    print(student_list[student_index])
-
-
+# Main and running
 def main():
     # List of Student Info
     student_list = []
@@ -407,7 +416,6 @@ def main():
             "5.Exit\n"
         )
         user_input = int(input("Enter Option: "))
-
 
         if user_input == 1:  # Add student
             student_list.append(create_student())
@@ -431,7 +439,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 '''
 /usr/local/bin/python3.13 /Users/joaodias/Desktop/CMPSC-132---Final-Project/Paste/StudentTester.py 
