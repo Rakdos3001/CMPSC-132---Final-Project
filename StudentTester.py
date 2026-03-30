@@ -13,6 +13,33 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
+def find_student_id(student_list: list[Student]):
+    """
+    Returns the index of a student in student_list, searching by student_id
+    Returns -1 if index not found
+    Used for editing, removing, and displaying
+    """
+    ids = [
+        student.get_student_id()
+        for student in student_list
+    ]
+
+    # Display students
+    for (index, student_id) in enumerate(ids):
+        student = student_list[index]
+        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
+
+    # Get and validate student
+    while True:
+        try:
+            target_id = int(input("Enter the id of the student: "))
+            index = ids.index(target_id)
+
+            return index
+        except ValueError:
+            print("ID not found.")
+            continue
+
 def create_student():
     """
     Returns a new Student to be added.
@@ -86,34 +113,6 @@ def create_student():
 
     return unified_student_info
 
-def find_student_id(student_list: list[Student]):
-    """
-    Returns the index of a student in student_list, searching by student_id
-    Returns -1 if index not found
-    Used for editing, removing, and displaying
-    """
-    ids = [
-        student.get_student_id()
-        for student in student_list
-    ]
-
-    # Display students
-    for (index, student_id) in enumerate(ids):
-        student = student_list[index]
-        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
-
-    # Get and validate student
-    while True:
-        try:
-            target_id = int(input("Enter the id of the student: "))
-            index = ids.index(target_id)
-
-            return index
-        except ValueError:
-            print("ID not found.")
-            continue
-
-# Edit Info
 def edit_info(student_list: list[Student]):
     index = find_student_id(student_list)
     student = student_list[index]
@@ -290,6 +289,16 @@ def edit_info(student_list: list[Student]):
             print("Invalid action.")
             continue
 
+def remove_student(student_list: list[Student]):
+    student_index = find_student_id(student_list)
+    confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
+    if confirmation == "yes":
+        student_list.remove(student_list[student_index])
+        print("Student Successfully Removed")
+
+def display_student(student_list: list[Student]):
+    student_index = find_student_id(student_list)
+    print(student_list[student_index])
 
 def main():
     # List of Student Info
@@ -312,15 +321,10 @@ def main():
             edit_info(student_list)
 
         elif user_input == 3: # Remove student
-            student_index = find_student_id(student_list)
-            confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
-            if confirmation == "yes":
-                student_list.remove(student_list[student_index])
-                print("Student Successfully Removed")
+            remove_student(student_list)
 
         elif user_input == 4: # Display student
-            student_index = find_student_id(student_list)
-            print(student_list[student_index])
+            display_student(student_list)
 
         #Loop Breaks here
         elif user_input == 5:
