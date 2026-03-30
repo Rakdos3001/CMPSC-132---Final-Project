@@ -114,7 +114,7 @@ def create_student():
     print("Student Added Successfully")
     return unified_student_info
 
-def example_students():
+def create_example_students():
     """
     Statically creates and returns two example students for easy testing
     """
@@ -373,25 +373,27 @@ def edit_info(student_list: list[Student]):
             edit_address(student)
 
         # Email and Phone
-        elif user_choice == 3:
+        elif user_choice == 3: # Email
             edit_emails(student)
 
-        elif user_choice == 4:
+        elif user_choice == 4: # Phone
             edit_phones(student)
 
-        # Misc choices for user to update
-        elif user_choice == 5:
+        # Dates
+        elif user_choice == 5: # Date of birth
             edit_date(student.get_birth_date(), "Birth")
 
-        elif user_choice == 6:
+        elif user_choice == 6: # Enrollment date
             edit_date(student.get_acceptance_date(), "Enrollment")
 
-        elif user_choice == 7:
+        elif user_choice == 7: # Start of semester
             edit_date(student.get_semester_start(), "Semester Start")
 
+        # Major
         elif user_choice == 8:
             edit_major(student)
 
+        # End
         elif user_choice == 9:
             print("Edits Successfully Implemented")
             break
@@ -403,7 +405,7 @@ def edit_info(student_list: list[Student]):
 def main():
     # List of Student Info
     student_list = []
-    s1, s2 = example_students()
+    s1, s2 = create_example_students()
     student_list.append(s1)
     student_list.append(s2)
     while True:
