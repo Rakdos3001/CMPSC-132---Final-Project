@@ -118,25 +118,37 @@ def create_example_students():
     """
     Statically creates and returns two example students for easy testing
     """
-    unified_birth_day_example = Date(2006, 12, 11)
-    unified_enrollment_date_example = Date(2010, 1, 15)
-    unified_starting_semester_date_example = Date(2020, 11, 9)
-    unified_mailing_address_example = MailingAddress("804 Bird Road", "Media", "PA", 19191, "Local")
 
-    email_list_example = []
-    unified_email = EmailAddress("ExampleEmail@100", "Personal")
-    email_list_example.append(unified_email)
-
-    phone_list_example = []
-    unified_phone = Phone("215-191-5222", "Personal")
-    phone_list_example.append(unified_phone)
-
-    example_student1 = Student(12345,"Gina","Wu","Chen",unified_mailing_address_example,
-                                   email_list_example, phone_list_example, unified_birth_day_example, unified_enrollment_date_example,
-                                   unified_starting_semester_date_example, "Art")
-    example_student2 = Student(98765,"Ken","Khan","Katsuragi",unified_mailing_address_example,
-                                   email_list_example, phone_list_example, unified_birth_day_example, unified_enrollment_date_example,
-                                   unified_starting_semester_date_example, "History")
+    example_student1 = Student(
+        12345, "Lex", "Guo", "",
+        MailingAddress("123 Street", "City 1", "State 1", 12345, "Home"),
+        [
+            EmailAddress("example1@psu.edu", "School"),
+            EmailAddress("example1@gmail.com", "Personal")
+        ],
+        [
+            Phone("111-222-3333", "Cell")
+        ],
+        Date(2006, 1, 1),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Computer Science"
+    )
+    example_student2 = Student(
+        98765, "Joao", "Dias", "",
+        MailingAddress("987 Street", "City 2", "State 2", 98765, "Home"),
+        [
+            EmailAddress("example2@psu.edu", "School"),
+            EmailAddress("example2@work.com", "Work")
+        ],
+        [
+            Phone("999-888-7777", "Home")
+        ],
+        Date(2007, 12, 12),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Computer Science"
+    )
 
     return example_student1, example_student2
 
@@ -345,14 +357,14 @@ def edit_info(student_list: list[Student]):
         print(
             "This Is The Current Student Info:\n"
             # Name
-            f"\t1. Name: {student.get_name_first()} {student.get_name_middle()},{student.get_name_last()} \n"
+            f"\t1. Name: {student.get_name_first()} {student.get_name_middle()} {student.get_name_last()} \n"
             
             # Address
             f"\t2. Address: {str(student.get_mailing_address())}\n"
 
             # Emails And Phones
-            f"\t3. Email Addresses: \n\t{email_str}\n"
-            f"\t4. Phone Numbers: \n\t{phone_str}\n"
+            f"\t3. Email Addresses: \n\t\t{email_str}\n"
+            f"\t4. Phone Numbers: \n\t\t{phone_str}\n"
 
             # Dates
             f"\t5. Birthday: {student.get_birth_date()}\n"
@@ -395,11 +407,12 @@ def edit_info(student_list: list[Student]):
 
         # End
         elif user_choice == 9:
-            print("Edits Successfully Implemented")
             break
         else:
             print("Invalid action.")
             continue
+
+        print("Changes successfully made.")
 
 # Main and running
 def main():
