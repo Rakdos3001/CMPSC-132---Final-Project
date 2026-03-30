@@ -56,19 +56,19 @@ def create_student():
 
 
     # Birthday Info for Classes
-    birth_month = int(input("Please Enter Your Birth Month:"))
+    birth_month = int(input("Please Enter Your Birth Month (Just Number,No Words):"))
     birth_day = int(input("Please Enter Your Birth Day:"))
     birth_year = int(input("Please Enter Your Birth Year:"))
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
     # Enrollment Info for Classes
-    enrollment_month = int(input("Please Enter Your Enrollment Month:"))
+    enrollment_month = int(input("Please Enter Your Enrollment Month (Just Number,No Words):"))
     enrollment_day = int(input("Please Enter Your Enrollment Day:"))
     enrollment_year = int(input("Please Enter Your Enrollment Year:"))
     unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
 
     #Semester info for classes
-    starting_semester_month = int(input("Please Enter Your Starting Semester Month:"))
+    starting_semester_month = int(input("Please Enter Your Starting Semester Month (Just Number,No Words):"))
     starting_semester_day = int(input("Please Enter Your Starting Semester Day:"))
     starting_semester_year = int(input("Please Enter Your Starting Semester Year:"))
     unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
