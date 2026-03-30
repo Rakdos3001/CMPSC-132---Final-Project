@@ -158,7 +158,7 @@ def remove_student(student_list: list[Student]):
     """
     student_index = find_student_id(student_list)
     confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
-    if confirmation == "yes":
+    if confirmation == "y":
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
 
