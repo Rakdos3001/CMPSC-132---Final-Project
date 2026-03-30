@@ -48,7 +48,7 @@ def create_student():
 
     # Name
     name_first = input("Enter first name: ")
-    name_middle = input("Enter middle name (Type N/A if None): ")
+    name_middle = input("Enter middle name: ")
     name_last = input("Enter last name: ")
     student_id = int(input("Enter student ID: "))
 
@@ -69,7 +69,7 @@ def create_student():
         unified_email = EmailAddress(email_address, email_type)
         email_list.append(unified_email)
 
-        ending1 = input("Do you want to enter another? (Type Y/n): ").lower()
+        ending1 = input("Do you want to enter another? (Type y/N): ").lower()
         if ending1 != "y":
             break
 
@@ -82,24 +82,24 @@ def create_student():
         unified_phone = Phone(phone_number, phone_type)
         phone_list.append(unified_phone)
 
-        ending2 = input("Do you want to enter another? (Type Y/n): ").lower()
+        ending2 = input("Do you want to enter another? (Type y/N): ").lower()
         if ending2 != "y":
             break
 
     # Birthday
-    birth_month = int(input("Enter birth month (Just Numbers, No Words): "))
+    birth_month = int(input("Enter birth month: "))
     birth_day = int(input("Enter birth day: "))
     birth_year = int(input("Enter birth year: "))
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
     # Enrollment
-    enrollment_month = int(input("Enter enrollment month (Just Numbers, No Words): "))
+    enrollment_month = int(input("Enter enrollment month: "))
     enrollment_day = int(input("Enter enrollment day: "))
     enrollment_year = int(input("Enter enrollment year: "))
     unified_enrollment_date = Date(enrollment_year, enrollment_month, enrollment_day)
 
     # Semester
-    starting_semester_month = int(input("Enter starting semester month (Just Numbers, No Words): "))
+    starting_semester_month = int(input("Enter starting semester month: "))
     starting_semester_day = int(input("Enter starting semester day: "))
     starting_semester_year = int(input("Enter starting semester year: "))
     unified_starting_semester_date = Date(starting_semester_year, starting_semester_month, starting_semester_day)
@@ -157,7 +157,7 @@ def remove_student(student_list: list[Student]):
     Gets a student ID and removes that student from student_list
     """
     student_index = find_student_id(student_list)
-    confirmation = input("Are you sure you wish to delete? (Type Yes/No): ").lower()
+    confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
     if confirmation == "yes":
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
@@ -327,13 +327,12 @@ def edit_major(student: Student):
     """
     Smaller function for editing student majors
     """
-    while True:
-        print(f"Major: {student.get_major()}\n")
-        new_major = input("Enter new major or 1 to exit: ")
-        if new_major == "1":
-            break
-        else:
-            student.set_major(new_major)
+    print(f"Current Major: {student.get_major()}\n")
+
+    new_major = input("Enter new major or 1 to exit: ")
+    student.set_major(new_major)
+
+    print(f"Major changed to {new_major}")
 
 def edit_info(student_list: list[Student]):
     """
