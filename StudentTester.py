@@ -36,7 +36,7 @@ def create_student():
     email_list = []
     while True:
         email_address = input("Please Enter Your Email:")
-        email_type = input("What Kind Of Email is it?(Academic,Industrial,etc.):")
+        email_type = input("What Kind Of Email is it? (Academic,Industrial,etc.):")
         unified_email = EmailAddress(email_address, email_type)
         email_list.append(unified_email)
         ending1 = input("Do you want to enter another? (Type y/n):")
@@ -47,7 +47,7 @@ def create_student():
     phone_list = []
     while True:
         phone_number = input("Please Enter Your Phone Number:")
-        phone_type = input("What Kind Of Phone is it?(Cell,Home,Office):")
+        phone_type = input("What Kind Of Phone is it? (Cell,Home,Office):")
         unified_phone = Phone(phone_number, phone_type)
         phone_list.append(unified_phone)
         ending2 = input("Do you want to enter another? (Type y/n):")
