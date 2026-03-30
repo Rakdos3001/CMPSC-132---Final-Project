@@ -364,7 +364,6 @@ def edit_info(student_list: list[Student]):
         elif user_choice == 8:
             while True:
                 print(f"Major: {student.get_major()}\n")
-                print(f"1. Exit")
                 new_major = input("Enter new major or 1 to exit: ")
                 if new_major == "1":
                     break
