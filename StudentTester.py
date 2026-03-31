@@ -26,6 +26,7 @@ def find_student_id(student_list: list[Student]):
     ]
 
     # Display students
+    print("ID: NAME")
     for (index, student_id) in enumerate(ids):
         student = student_list[index]
         print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
@@ -423,11 +424,11 @@ def main():
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
         print(
-            "1.Add A Student\n"
-            "2.Edit Student Info\n"
-            "3.Remove Student\n"
-            "4.Display Student\n"
-            "5.Exit\n"
+            "1. Add A Student\n"
+            "2. Edit Student Info\n"
+            "3. Remove Student\n"
+            "4. Display Student\n"
+            "5. Exit\n"
         )
         user_input = int(input("Enter Option: "))
 
