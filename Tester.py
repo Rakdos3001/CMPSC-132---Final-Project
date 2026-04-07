@@ -1,6 +1,6 @@
 # Name: Joao Dias And Lex Guo
 # Course: CMPSC 132
-# File Name: StudentTester.py
+# File Name: Tester.py
 # Date: 3/18/2026
 
 # Short Description: Allow Students And Others To Enter, Edit, Remove, Display, Or Remove Items from List of Student Info
