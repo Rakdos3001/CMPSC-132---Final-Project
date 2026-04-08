@@ -192,7 +192,7 @@ def edit_name(student: Student):
             new_name_middle = input("Enter New Middle name: ")
             student.set_name_middle(new_name_middle)
         elif new_input == 3:
-            new_name_last = input("Enter New last name: ")
+            new_name_last = input("Enter New Last name: ")
             student.set_name_last(new_name_last)
         elif new_input == 4:
             break
@@ -414,13 +414,9 @@ def edit_info(student_list: list[Student]):
 
         print("Changes successfully made.")
 
-# Main and running
-def main():
-    # List of Student Info
-    student_list = []
-    s1, s2 = create_example_students()
-    student_list.append(s1)
-    student_list.append(s2)
+# Main sub-menus
+# TODO: implement advisor menu
+def student_menu(student_list: list[Student]):
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
         print(
@@ -450,6 +446,19 @@ def main():
             break
         else:
             print("Invalid Number. Please Try Again")
+
+# Main and running
+def main():
+    # List of Student Info
+    student_list = []
+
+    # Add examples
+    s1, s2 = create_example_students()
+    student_list.append(s1)
+    student_list.append(s2)
+
+    # TODO: Go to student and advisor menus
+    student_menu(student_list)
 
 
 if __name__ == '__main__':
