@@ -4,17 +4,21 @@ from MailingAddress import MailingAddress
 from Phone import Phone
 from Date import Date
 from EmailAddress import EmailAddress
+from Course import Course
+from LinkedList import LinkedList
 
 class Student(Person):
 	# Constructor
 	def __init__(self, student_id: int, name_first: str, name_last: str, name_middle: str = None,
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
-				 acceptance_date: Date = None, semester_start: Date = None, major: str = "Undeclared"):
+				 acceptance_date: Date = None, semester_start: Date = None,
+				 major: str = "Undeclared", courses: LinkedList = None):
 		Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
 		self.__student_id = student_id
 		self.__acceptance_date = acceptance_date
 		self.__semester_start = semester_start
 		self.__major = major
+		self.__courses = courses
 
 	# Setters
 	def set_student_id(self, student_id: int):
@@ -29,6 +33,9 @@ class Student(Person):
 	def set_major(self, major: str):
 		self.__major = major
 
+	def set_courses(self, courses: LinkedList):
+		self.__courses = courses
+
 	# Getters
 	def get_student_id(self):
 		return self.__student_id
@@ -42,6 +49,9 @@ class Student(Person):
 	def get_major(self):
 		return self.__major
 
+	def get_courses(self):
+		return self.__courses
+
 	def __str__(self):
 		return (
         	Person.__str__(self) + "\n"
@@ -49,4 +59,5 @@ class Student(Person):
 			f"\tAcceptance Date: {self.__acceptance_date}\n"
 			f"\tSemester Starts: {self.__semester_start}\n"
 			f"\tMajor: {self.__major}\n"
+			f"\tCourses: {self.__courses}"
         )
