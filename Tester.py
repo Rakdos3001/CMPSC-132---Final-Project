@@ -415,7 +415,7 @@ def edit_info(student_list: list[Student]):
         print("Changes successfully made.")
 
 # Main sub-menus
-# TODO: implement advisor menu
+# TO DO: implement advisor menu
 def student_menu(student_list: list[Student]):
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
@@ -457,7 +457,7 @@ def main():
     student_list.append(s1)
     student_list.append(s2)
 
-    # TODO: Go to student and advisor menus
+    # TO DO: Go to student and advisor menus
     student_menu(student_list)
 
 
