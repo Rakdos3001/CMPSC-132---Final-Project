@@ -45,9 +45,6 @@ class Advisor:
         return self.__department
 
     #Advisees Setter/Getter
-    def set_status(self, new_status: str):
-        self.__status = new_status
-
     def set_advisees(self, new_advisees):
         self.__advisees = new_advisees
 
