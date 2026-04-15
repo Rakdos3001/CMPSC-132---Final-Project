@@ -1,7 +1,7 @@
 # Course class
 class Course:
     #Constructor
-    def __init__(course_number:str, semester_taken: str, delivery:str, status:str, grade:str):
+    def __init__(self, course_number: str, semester_taken: str, delivery:str, status:str, grade:str):
         self.__course_number = course_number
         self.__semester_taken = semester_taken
         self.__delivery = delivery
@@ -36,13 +36,22 @@ class Course:
     def get_status(self):
         return self.__status
 
-
     #Grade Setter/getter
     def set_grade(self, new_grade: str):
         self.__grade = new_grade
 
     def get_grade(self):
         return self.__grade
+
+    # Comparison overloads
+    def __eq__(self, other: Course):
+        return self.__course_number == other.get_course_number()
+
+    def __lt__(self, other: Course):
+        return self.__course_number < other.get_course_number()
+
+    def __gt__(self, other: Course):
+        return self.__course_number > other.get_course_number()
 
     #String Overload
     def __str__(self):

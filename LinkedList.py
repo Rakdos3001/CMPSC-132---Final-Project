@@ -1,5 +1,6 @@
 from Node import Node
 
+# Instead of changing LinkedList, we simply added comparisons operators in Student and Course
 # Linked list with only a head, no tail
 class LinkedList:
     def __init__(self):
