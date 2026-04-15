@@ -43,6 +43,16 @@ class Course:
     def get_grade(self):
         return self.__grade
 
+    # Comparison overloads
+    def __eq__(self, other: Course):
+        return self.__course_number == other.get_course_number()
+
+    def __lt__(self, other: Course):
+        return self.__course_number < other.get_course_number()
+
+    def __gt__(self, other: Course):
+        return self.__course_number > other.get_course_number()
+
     #String Overload
     def __str__(self):
         return (f"Course Number: {self.__course_number}"

@@ -52,6 +52,16 @@ class Student(Person):
 	def get_courses(self):
 		return self.__courses
 
+	# Overloads
+	def __eq__(self, other: Student):
+		return self.__student_id == other.get_student_id()
+
+	def __lt__(self, other: Student):
+		return self.__student_id < other.get_student_id()
+
+	def __gt__(self, other: Student):
+		return self.__student_id > other.get_student_id()
+
 	def __str__(self):
 		return (
         	Person.__str__(self) + "\n"

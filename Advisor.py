@@ -13,7 +13,7 @@ class Advisor(Person):
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
                  advisor_title: str = None, department: str = None, advisees: LinkedList = None):
         Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
-        self.__id = advisor_id
+        self.__advisor_id = advisor_id
         self.__advisor_title = advisor_title
         self.__department = department
         self.__advisees = advisees
@@ -41,13 +41,16 @@ class Advisor(Person):
 
     # ID Setter/Getter
     def set_id(self, new_id):
-        self.__id = new_id
+        self.__advisor_id = new_id
 
     def get_id(self):
-        return self.__id
+        return self.__advisor_id
 
     def __str__(self):
-        return (f"Name:{self.__name_first} {self.__name_last},{self.__name_middle} "
-                f"Advisor Title: {self.__advisor_title}"
-                f"Department: {self.__department}"
-                f"Advisee: {self.__advisees}")
+        return (
+            Person.__str__(self) + "\n"
+            f"\tName:{self.__name_first} {self.__name_last},{self.__name_middle}\n"
+            f"\tAdvisor Title: {self.__advisor_title}\n"
+            f"\tDepartment: {self.__department}\n"
+            f"\tAdvisee: {self.__advisees}\n"
+        )
