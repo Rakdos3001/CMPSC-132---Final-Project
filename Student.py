@@ -12,7 +12,7 @@ class Student(Person):
 	def __init__(self, student_id: int, name_first: str, name_last: str, name_middle: str = None,
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
 				 acceptance_date: Date = None, semester_start: Date = None,
-				 major: str = "Undeclared", courses: LinkedList = None):
+				 major: str = "Undeclared",courses: LinkedList = None):
 		Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
 		self.__student_id = student_id
 		self.__acceptance_date = acceptance_date
