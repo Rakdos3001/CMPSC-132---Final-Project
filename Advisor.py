@@ -4,7 +4,6 @@ from MailingAddress import MailingAddress
 from Phone import Phone
 from Date import Date
 from EmailAddress import EmailAddress
-from Course import Course
 from LinkedList import LinkedList
 
 # Course class

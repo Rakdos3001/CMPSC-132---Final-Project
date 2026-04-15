@@ -8,7 +8,6 @@ from Course import Course
 # Import Classes
 from EmailAddress import EmailAddress
 from MailingAddress import MailingAddress
-from Person import Person
 from Student import Student
 from Date import Date
 from Phone import Phone
