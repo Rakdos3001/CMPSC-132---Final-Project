@@ -13,7 +13,7 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
-# Functions
+# Functions for managing students
 def find_student_id(student_list: list[Student]):
     """
     Returns the index of a student in student_list, searching by student_id
@@ -41,6 +41,8 @@ def find_student_id(student_list: list[Student]):
         except ValueError:
             print("ID not found.")
             continue
+
+    return -1 # In case something breaks
 
 def create_student():
     """
@@ -170,7 +172,7 @@ def display_student(student_list: list[Student]):
     student_index = find_student_id(student_list)
     print(student_list[student_index])
 
-# Functions for editing
+# Functions for editing students
 def edit_name(student: Student):
     """
     Smaller function for editing student names
@@ -414,6 +416,10 @@ def edit_info(student_list: list[Student]):
 
         print("Changes successfully made.")
 
+# Functions for managing advisors
+# For storage, can either modify LinkedList to take Advisors and Courses (not ideal)
+# OR add comparison operators to Advisor and Course separately (probably better)
+
 # Main sub-menus
 # TO DO: implement advisor menu
 def student_menu(student_list: list[Student]):
@@ -457,7 +463,7 @@ def main():
     student_list.append(s1)
     student_list.append(s2)
 
-    # TO DO: Go to student and advisor menus
+    # TO DO: Choose between student and advisor menus
     student_menu(student_list)
 
 
