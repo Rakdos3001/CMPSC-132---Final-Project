@@ -1,7 +1,7 @@
 
 class Node:
 	# Constructor
-	def __init__(self, data, ):
+	def __init__(self, data):
 		self.__data = data
 		self.__next = None # Pointer to next node
 
