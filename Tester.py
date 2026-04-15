@@ -119,7 +119,7 @@ def create_student():
     print("Student Added Successfully")
     return unified_student_info
 
-def create_example_students():
+def create_example_students(student_list: list[Student]):
     """
     Statically creates and returns two example students for easy testing
     """
@@ -154,8 +154,57 @@ def create_example_students():
         Date(2026, 1, 1),
         "Computer Science"
     )
+    example_student3 = Student(
+        33333, "Jane", "Doe", "",
+        MailingAddress("333 Street", "City 3", "State 3", 33333, "Home"),
+        [
+            EmailAddress("example3@psu.edu", "School"),
+            EmailAddress("example3@work.com", "Work")
+        ],
+        [
+            Phone("333-333-3333", "Home")
+        ],
+        Date(2007, 12, 12),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Math"
+    )
+    example_student4 = Student(
+        44444, "John", "Doe", "",
+        MailingAddress("444 Street", "City 4", "State 4", 44444, "Home"),
+        [
+            EmailAddress("example4@psu.edu", "School"),
+            EmailAddress("example4@work.com", "Work")
+        ],
+        [
+            Phone("444-444-4444", "Home")
+        ],
+        Date(2007, 12, 12),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Physics"
+    )
+    example_student5 = Student(
+        55555, "Bob", "Brown", "",
+        MailingAddress("555 Street", "City 5", "State 5", 55555, "Home"),
+        [
+            EmailAddress("example5@psu.edu", "School"),
+            EmailAddress("example5@work.com", "Work")
+        ],
+        [
+            Phone("555-555-5555", "Home")
+        ],
+        Date(2007, 12, 12),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Engineering"
+    )
 
-    return example_student1, example_student2
+    student_list.append(example_student1)
+    student_list.append(example_student2)
+    student_list.append(example_student3)
+    student_list.append(example_student4)
+    student_list.append(example_student5)
 
 def remove_student(student_list: list[Student]):
     """
@@ -510,13 +559,12 @@ def create_advisor():
     print("advisor Added Successfully")
     return unified_advisor_info
 
-def create_example_advisor():
+def create_example_advisor(advisor_list: list[Advisor]):
     """
     Statically creates and returns two example students for easy testing
     """
-
     example_advisor1 = Advisor(
-        54321, "Lex", "Guo", "",
+        54321, "Marie", "White", "",
         MailingAddress("123 Street", "City 1", "State 1", 12345, "Home"),
         [
             EmailAddress("example1@psu.edu", "School"),
@@ -526,12 +574,12 @@ def create_example_advisor():
             Phone("111-222-3333", "Cell")
         ],
         Date(2006, 1, 1),
-        "Teacher",
+        "Professor",
         "English",
-        "[Add avisees here}"
+        LinkedList()
     )
     example_advisor2 = Advisor(
-        67890, "Joao", "Dias", "",
+        67890, "Chris", "Li", "",
         MailingAddress("987 Street", "City 2", "State 2", 98765, "Home"),
         [
             EmailAddress("example2@psu.edu", "School"),
@@ -543,10 +591,11 @@ def create_example_advisor():
         Date(2007, 12, 12),
         "Principal",
         "Staff",
-        "[Add avisees here}"
+        LinkedList()
     )
 
-    return example_advisor1, example_advisor2
+    advisor_list.append(example_advisor1)
+    advisor_list.append(example_advisor2)
 
 # Not Done
 def remove_advisor(advisor_list: list[Advisor]):
@@ -574,12 +623,12 @@ def edit_advisor_info(advisor_list: list[Advisor]):
 # Sub-menus
 def student_menu(student_list: list[Student]):
     while True:
-        print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
+        print("\nHello and welcome! Please pick an option by inputting the number assigned to it: \n")
         print(
-            "1. Add A Student\n"
-            "2. Edit Student Info\n"
-            "3. Remove Student\n"
-            "4. Display Student\n"
+            "1. Add a student\n"
+            "2. Edit student info\n"
+            "3. Remove student\n"
+            "4. Display student\n"
             "5. Exit\n"
         )
         user_input = int(input("Enter Option: "))
@@ -600,55 +649,78 @@ def student_menu(student_list: list[Student]):
         elif user_input == 5:
             print("Thank you for using our program!")
             break
-        else:
+
+        else: # Error
             print("Invalid Number. Please Try Again")
 
 def advisor_menu(advisor_list: list[Advisor]):
     while True:
-        print("\nHello advisor! Please pick an option by inputting the number assigned to it: \n")
         print(
-            "1. Add An advisor\n"
-            "2. Edit Advisor Info\n"
-            "3. Remove A Student\n"
-            "4. Display advisor Info\n"
+            "\nHello advisor! Please pick an option by inputting the number assigned to it: \n"
+            "1. Add an advisor\n"
+            "2. Edit advisor info\n"
+            "3. Remove a student\n"
+            "4. Display advisor info\n"
             "5. Exit\n"
         )
-        user_input = int(input("Enter Option: "))
+        user_input = int(input("Enter option: "))
 
-        if user_input == 1:  # Add student
+        if user_input == 1:  # Add advisor
             advisor_list.append(create_advisor())
 
-        elif user_input == 2:  # Edit student
+        elif user_input == 2:  # Edit advisor
             edit_advisor_info(advisor_list)
 
-        elif user_input == 3:  # Remove student
+        elif user_input == 3:  # Remove advisor
             remove_advisor(advisor_list)
 
-        elif user_input == 4:  # Display student
+        elif user_input == 4:  # Display advisor
             display_advisor(advisor_list)
+
+        elif user_input == 5: # Exit
+            print("Thank you for using our program!")
+            break
+
+        else: # Error
+            print("Invalid action.")
+            continue
 
 # Main and running
 def main():
     # List of Student Info
-    student_list = []
-    advisor_list = []
+    student_list: list[Student] = []
+    advisor_list: list[Advisor] = []
 
-    # Add examples
-    s1, s2 = create_example_students()
-    student_list.append(s1)
-    student_list.append(s2)
+    # Create examples
+    create_example_students(student_list)
+    create_example_advisor(advisor_list)
 
-    s3, s4 = create_example_advisor()
-    advisor_list.append(s3)
-    advisor_list.append(s4)
+    # Add example students to the example advisors
+    advisor_list[0].get_advisees().append(student_list[0])
+    advisor_list[0].get_advisees().append(student_list[1])
+    advisor_list[0].get_advisees().append(student_list[2])
 
-    # TO DO: Choose between student and advisor menus
-    user_choice = int(input("Hello! Please Choose Whether You Are A Student Or advisor\n"
-                            "Press 1 for Student, 2 for advisor: "))
-    if user_choice == 1:
-        student_menu(student_list)
-    elif user_choice == 2:
-        advisor_menu(advisor_list)
+    advisor_list[1].get_advisees().append(student_list[3])
+    advisor_list[1].get_advisees().append(student_list[4])
+
+    while True:
+        print(
+            "What are you managing? \n"
+            "\t1. Student \n"
+            "\t2. Advisor \n"
+            "\t3. Exit"
+        )
+        user_choice = int(input("Enter an action: "))
+
+        if user_choice == 1:
+            student_menu(student_list)
+        elif user_choice == 2:
+            advisor_menu(advisor_list)
+        elif user_choice == 3:
+            break
+        else:
+            print("Invalid action.")
+            continue
 
 
 if __name__ == '__main__':

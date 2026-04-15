@@ -6,6 +6,9 @@ class LinkedList:
     def __init__(self):
         self.__head: Node = None
 
+    def get_head(self):
+        return self.__head
+
     def append(self, data):
         # Wrap the data into a node
         new_node = Node(data)

@@ -1,3 +1,4 @@
+from Student import Student
 from Person import Person
 from MailingAddress import MailingAddress
 from Phone import Phone
@@ -47,10 +48,19 @@ class Advisor(Person):
         return self.__advisor_id
 
     def __str__(self):
+        # Traverse advisees list and turn into a string
+        advisee_str = ""
+        pos = self.__advisees.get_head()
+        while pos is not None:
+            student: Student = pos.get_data()
+            advisee_str += f"{student.get_name_first()} {student.get_name_last()}, "
+
+            pos = pos.get_next()
+        advisee_str = advisee_str.strip(", ")
+
         return (
             Person.__str__(self) + "\n"
-            f"\tName:{self.__name_first} {self.__name_last},{self.__name_middle}\n"
             f"\tAdvisor Title: {self.__advisor_title}\n"
             f"\tDepartment: {self.__department}\n"
-            f"\tAdvisee: {self.__advisees}\n"
+            f"\tAdvisee: {advisee_str}\n"
         )
