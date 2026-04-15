@@ -14,6 +14,7 @@ from Date import Date
 from Phone import Phone
 from Advisor import Advisor
 
+
 # Functions for managing students
 def find_student_id(student_list: list[Student]):
     """
@@ -43,7 +44,8 @@ def find_student_id(student_list: list[Student]):
             print("ID not found.")
             continue
 
-    return -1 # In case something breaks
+    return -1  # In case something breaks
+
 
 def create_student():
     """
@@ -118,6 +120,7 @@ def create_student():
     print("Student Added Successfully")
     return unified_student_info
 
+
 def create_example_students():
     """
     Statically creates and returns two example students for easy testing
@@ -156,6 +159,7 @@ def create_example_students():
 
     return example_student1, example_student2
 
+
 def remove_student(student_list: list[Student]):
     """
     Gets a student ID and removes that student from student_list
@@ -166,12 +170,14 @@ def remove_student(student_list: list[Student]):
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
 
+
 def display_student(student_list: list[Student]):
     """
     Displays the information of a student in student_list
     """
     student_index = find_student_id(student_list)
     print(student_list[student_index])
+
 
 # Functions for editing students
 def edit_name(student: Student):
@@ -199,6 +205,7 @@ def edit_name(student: Student):
             student.set_name_last(new_name_last)
         elif new_input == 4:
             break
+
 
 def edit_address(student: Student):
     """
@@ -234,6 +241,7 @@ def edit_address(student: Student):
         elif new_input == 6:
             break
 
+
 def edit_emails(student: Student):
     """
     Smaller function for editing student emails
@@ -267,6 +275,7 @@ def edit_emails(student: Student):
             case _:
                 print("Invalid Action.")
                 continue
+
 
 def edit_phones(student: Student):
     """
@@ -302,6 +311,7 @@ def edit_phones(student: Student):
                 print("Invalid Action.")
                 continue
 
+
 def edit_date(date: Date, date_type: str):
     """
     Smaller function for editing dates
@@ -327,6 +337,7 @@ def edit_date(date: Date, date_type: str):
         elif new_input == 4:
             break
 
+
 def edit_major(student: Student):
     """
     Smaller function for editing student majors
@@ -337,6 +348,7 @@ def edit_major(student: Student):
     student.set_major(new_major)
 
     print(f"Major changed to {new_major}")
+
 
 def edit_info(student_list: list[Student]):
     """
@@ -361,7 +373,7 @@ def edit_info(student_list: list[Student]):
             "This Is The Current Student Info:\n"
             # Name
             f"\t1. Name: {student.get_name_first()} {student.get_name_middle()} {student.get_name_last()} \n"
-            
+
             # Address
             f"\t2. Address: {str(student.get_mailing_address())}\n"
 
@@ -373,7 +385,7 @@ def edit_info(student_list: list[Student]):
             f"\t5. Birthday: {student.get_birth_date()}\n"
             f"\t6. Enrollment Date: {student.get_acceptance_date()}\n"
             f"\t7. Starting Semester: {student.get_semester_start()}\n"
-                        
+
             f"\t8. Major: {student.get_major()}\n"
             f"\t9. Exit"
         )
@@ -388,20 +400,20 @@ def edit_info(student_list: list[Student]):
             edit_address(student)
 
         # Email and Phone
-        elif user_choice == 3: # Email
+        elif user_choice == 3:  # Email
             edit_emails(student)
 
-        elif user_choice == 4: # Phone
+        elif user_choice == 4:  # Phone
             edit_phones(student)
 
         # Dates
-        elif user_choice == 5: # Date of birth
+        elif user_choice == 5:  # Date of birth
             edit_date(student.get_birth_date(), "Birth")
 
-        elif user_choice == 6: # Enrollment date
+        elif user_choice == 6:  # Enrollment date
             edit_date(student.get_acceptance_date(), "Enrollment")
 
-        elif user_choice == 7: # Start of semester
+        elif user_choice == 7:  # Start of semester
             edit_date(student.get_semester_start(), "Semester Start")
 
         # Major
@@ -417,10 +429,37 @@ def edit_info(student_list: list[Student]):
 
         print("Changes successfully made.")
 
+
 # Main sub-menus
 
 # Functions for managing advisors
-#Adviser Menu
+# Adviser Menu
+def adviser_menu(adviser_list: list[Person]):
+    while True:
+        print("\nHello Adviser! Please pick an option by inputting the number assigned to it: \n")
+        print(
+            "1. Add An Adviser\n"
+            "2. Edit Advisor Info\n"
+            "3. Remove A Student\n"
+            "4. Display Adviser Info\n"
+            "5. Exit\n"
+        )
+        user_input = int(input("Enter Option: "))
+
+        if user_input == 1:  # Add student
+            adviser_list.append(create_adviser())
+
+        elif user_input == 2:  # Edit student
+            edit_info(adviser_list)
+
+        elif user_input == 3:  # Remove student
+            remove_adviser(adviser_list)
+
+        elif user_input == 4:  # Display student
+            display_adviser(adviser_list)
+
+
+#
 def find_advisor_id(advisor_list: list[Advisor]):
     """
     Returns the index of a student in student_list, searching by student_id
@@ -449,63 +488,7 @@ def find_advisor_id(advisor_list: list[Advisor]):
             print("ID not found.")
             continue
 
-    return -1 # In case something breaks
-
-def adviser_menu(adviser_list: list[Person]):
-    while True:
-        print("\nHello Adviser! Please pick an option by inputting the number assigned to it: \n")
-        print(
-            "1. Add An Adviser\n"
-            "2. Edit Advisor Info\n"
-            "3. Remove A Student\n"
-            "4. Display Adviser Info\n"
-            "5. Exit\n"
-        )
-        user_input = int(input("Enter Option: "))
-
-        if user_input == 1:  # Add student
-            adviser_list.append(create_adviser())
-
-        elif user_input == 2:  # Edit student
-            edit_info(adviser_list)
-
-        elif user_input == 3:  # Remove student
-            remove_adviser(adviser_list)
-
-        elif user_input == 4:  # Display student
-            display_adviser(adviser_list)
-
-#Haven't Finished Yet
-def find_adviser_id(student_list: list[Student]):
-    """
-    Returns the index of a student in student_list, searching by student_id
-    Returns -1 if index not found
-    Used for editing, removing, and displaying
-    """
-    ids = [
-        student.get_student_id()
-        for student in student_list
-    ]
-
-    # Display students
-    print("ID: NAME")
-    for (index, student_id) in enumerate(ids):
-        student = student_list[index]
-        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
-
-    # Get and validate student
-    while True:
-        try:
-            target_id = int(input("Enter the id of the student: "))
-            index = ids.index(target_id)
-
-            return index
-        except ValueError:
-            print("ID not found.")
-            continue
-
     return -1  # In case something breaks
-
 
 def create_adviser():
     """
@@ -557,20 +540,18 @@ def create_adviser():
     birth_year = int(input("Enter birth year: "))
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
-
-
     advisor_title = input("What's Your Title?: ")
     department = input("What's your department?: ")
-    #Need To Do
+    # Need To Do
     advisees: LinkedList
 
     # Creation
     unified_adviser_info = Advisor(adviser_id, name_first, name_last, name_middle, unified_mailing_address,
-                                   email_list, phone_list, unified_birth_day,advisor_title,department,advisees)
+                                   email_list, phone_list, unified_birth_day, advisor_title, department, advisees)
     print("Adviser Added Successfully")
     return unified_adviser_info
 
-#Change Values For Later
+
 def create_example_adviser():
     """
     Statically creates and returns two example students for easy testing
@@ -609,7 +590,8 @@ def create_example_adviser():
 
     return example_adviser1, example_adviser2
 
-#Not Done
+
+# Not Done
 def remove_adviser(adviser_list: list[Advisor]):
     """
     Gets a student ID and removes that student from student_list
@@ -620,7 +602,8 @@ def remove_adviser(adviser_list: list[Advisor]):
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
 
-#Not Done
+
+# Not Done
 def display_adviser(student_list: list[Student]):
     """
     Displays the information of a student in student_list
@@ -636,7 +619,6 @@ def edit_adviser(student: Student):
 
 def edit_info(student_list: list[Student]):
     pass
-
 
 
 def student_menu(student_list: list[Student]):
@@ -670,6 +652,7 @@ def student_menu(student_list: list[Student]):
         else:
             print("Invalid Number. Please Try Again")
 
+
 # Main and running
 def main():
     # List of Student Info
@@ -680,15 +663,17 @@ def main():
     s1, s2 = create_example_students()
     student_list.append(s1)
     student_list.append(s2)
+    s3, s4 = create_example_adviser()
+    adviser_list.append(s3)
+    adviser_list.append(s4)
 
     # TO DO: Choose between student and advisor menus
     User_Choice = int(input("Hello! Please Choose Whether You Are A Student Or Adviser\n"
-                        "Press 1 for Student, 2 for Adviser: "))
+                            "Press 1 for Student, 2 for Adviser: "))
     if User_Choice == 1:
         student_menu(student_list)
     elif User_Choice == 2:
         adviser_menu(adviser_list)
-
 
 
 if __name__ == '__main__':
