@@ -2,7 +2,7 @@
 # Course: CMPSC 132
 # File Name: Tester.py
 # Date: 3/18/2026
-
+from Course import Course
 # Short Description: Allow Students And Others To Enter, Edit, Remove, Display, Or Remove Items from List of Student Info
 
 # Import Classes
@@ -123,6 +123,16 @@ def create_example_students(student_list: list[Student]):
     """
     Statically creates and returns two example students for easy testing
     """
+    example_courses = LinkedList()
+    example_courses.append(
+        Course("MATH 1", "Fall 25", "In-Person", "In-Progress", "A")
+    )
+    example_courses.append(
+        Course("ENGL 2", "Fall 25", "In-Person", "In-Progress", "B")
+    )
+    example_courses.append(
+        Course("CHEM 3", "Fall 25", "In-Person", "In-Progress", "C")
+    )
 
     example_student1 = Student(
         12345, "Lex", "Guo", "",
@@ -137,7 +147,8 @@ def create_example_students(student_list: list[Student]):
         Date(2006, 1, 1),
         Date(2025, 1, 1),
         Date(2026, 1, 1),
-        "Computer Science"
+        "Computer Science",
+        example_courses
     )
     example_student2 = Student(
         98765, "Joao", "Dias", "",
@@ -152,7 +163,8 @@ def create_example_students(student_list: list[Student]):
         Date(2007, 12, 12),
         Date(2025, 1, 1),
         Date(2026, 1, 1),
-        "Computer Science"
+        "Computer Science",
+        example_courses
     )
     example_student3 = Student(
         33333, "Jane", "Doe", "",
@@ -167,7 +179,8 @@ def create_example_students(student_list: list[Student]):
         Date(2007, 12, 12),
         Date(2025, 1, 1),
         Date(2026, 1, 1),
-        "Math"
+        "Math",
+        example_courses
     )
     example_student4 = Student(
         44444, "John", "Doe", "",
@@ -182,7 +195,8 @@ def create_example_students(student_list: list[Student]):
         Date(2007, 12, 12),
         Date(2025, 1, 1),
         Date(2026, 1, 1),
-        "Physics"
+        "Physics",
+        example_courses
     )
     example_student5 = Student(
         55555, "Bob", "Brown", "",
@@ -197,7 +211,8 @@ def create_example_students(student_list: list[Student]):
         Date(2007, 12, 12),
         Date(2025, 1, 1),
         Date(2026, 1, 1),
-        "Engineering"
+        "Engineering",
+        example_courses
     )
 
     student_list.append(example_student1)

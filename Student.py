@@ -63,11 +63,21 @@ class Student(Person):
 		return self.__student_id > other.get_student_id()
 
 	def __str__(self):
+		# Traverse courses list and turn into a string
+		course_str = ""
+		pos = self.__courses.get_head()
+		while pos is not None:
+			course: Course = pos.get_data()
+			course_str += f"{course.get_course_number()}, "
+
+			pos = pos.get_next()
+		course_str = course_str.strip(", ")
+
 		return (
         	Person.__str__(self) + "\n"
 			f"\tStudent ID: {self.__student_id}\n"
 			f"\tAcceptance Date: {self.__acceptance_date}\n"
 			f"\tSemester Starts: {self.__semester_start}\n"
 			f"\tMajor: {self.__major}\n"
-			f"\tCourses: {self.__courses}"
+			f"\tCourses: {course_str}"
         )
