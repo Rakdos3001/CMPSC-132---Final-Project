@@ -1,5 +1,6 @@
 from Node import Node
 
+# 
 # Linked list with only a head, no tail
 class LinkedList:
     def __init__(self):

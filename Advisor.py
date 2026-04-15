@@ -1,34 +1,22 @@
+from Person import Person
+from MailingAddress import MailingAddress
+from Phone import Phone
+from Date import Date
+from EmailAddress import EmailAddress
+from Course import Course
+from LinkedList import LinkedList
+
 # Course class
-class Advisor:
+class Advisor(Person):
     #Constructor
-    def __init__(name_first: str, name_last: str, name_middle:str, advisor_title:str,
-                 department:str, advisees: LinkedList = None):
-        self.__name_first = name_first
-        self.__name_last = name_last
-        self.__name_middle = name_middle
+    def __init__(self, advisor_id: int, name_first: str, name_last: str, name_middle: str = None,
+                 address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
+                 advisor_title: str = None, department: str = None, advisees: LinkedList = None):
+        Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
+        self.__id = advisor_id
         self.__advisor_title = advisor_title
         self.__department = department
         self.__advisees = advisees
-
-
-    #Name Setter/Getetrs
-    def set_name_first(self, name_first: str):
-        self.__name_first = name_first
-
-    def set_name_last(self, name_last: str):
-        self.__name_last = name_last
-
-    def set_name_middle(self, name_middle: str):
-        self.__name_middle = name_middle
-
-    def get_name_first(self):
-        return self.__name_first
-
-    def get_name_last(self):
-        return self.__name_last
-
-    def get_name_middle(self):
-        return self.__name_middle
 
     #Advisor Title Setter/Getter
     def set_advisor_title(self, new_advisor_title: str):
@@ -51,8 +39,15 @@ class Advisor:
     def get_advisees(self):
         return self.__advisees
 
+    # ID Setter/Getter
+    def set_id(self, new_id):
+        self.__id = new_id
+
+    def get_id(self):
+        return self.__id
+
     def __str__(self):
         return (f"Name:{self.__name_first} {self.__name_last},{self.__name_middle} "
                 f"Advisor Title: {self.__advisor_title}"
                 f"Department: {self.__department}"
-                f"Advisee: {advisee_str}")
+                f"Advisee: {self.__advisees}")
