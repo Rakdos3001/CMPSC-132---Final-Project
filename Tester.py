@@ -531,10 +531,15 @@ def create_adviser():
     unified_birth_day = Date(birth_year, birth_month, birth_day)
 
 
+
+    advisor_title = input("What's Your Title?: ")
+    department = input("What's your department?: ")
+    #Need To Do
+    advisees: LinkedList
+
     # Creation
-    unified_adviser_info = Student(student_id, name_first, name_last, name_middle, unified_mailing_address,
-                                   email_list, phone_list, unified_birth_day, unified_enrollment_date,
-                                   unified_starting_semester_date, major)
+    unified_adviser_info = Advisor(adviser_id, name_first, name_last, name_middle, unified_mailing_address,
+                                   email_list, phone_list, unified_birth_day,advisor_title,department,advisees)
     print("Adviser Added Successfully")
     return unified_adviser_info
 
@@ -544,8 +549,8 @@ def create_example_adviser():
     Statically creates and returns two example students for easy testing
     """
 
-    example_student1 = Student(
-        12345, "Lex", "Guo", "",
+    example_adviser1 = Advisor(
+        54321, "Lex", "Guo", "",
         MailingAddress("123 Street", "City 1", "State 1", 12345, "Home"),
         [
             EmailAddress("example1@psu.edu", "School"),
@@ -555,12 +560,12 @@ def create_example_adviser():
             Phone("111-222-3333", "Cell")
         ],
         Date(2006, 1, 1),
-        Date(2025, 1, 1),
-        Date(2026, 1, 1),
-        "Computer Science"
+        "Teacher",
+        "English",
+        "[Add avisees here}"
     )
-    example_student2 = Student(
-        98765, "Joao", "Dias", "",
+    example_adviser2 = Advisor(
+        67890, "Joao", "Dias", "",
         MailingAddress("987 Street", "City 2", "State 2", 98765, "Home"),
         [
             EmailAddress("example2@psu.edu", "School"),
@@ -570,15 +575,15 @@ def create_example_adviser():
             Phone("999-888-7777", "Home")
         ],
         Date(2007, 12, 12),
-        Date(2025, 1, 1),
-        Date(2026, 1, 1),
-        "Computer Science"
+        "Principal",
+        "Staff",
+        "[Add avisees here}"
     )
 
-    return example_student1, example_student2
+    return example_adviser1, example_adviser2
 
 #Not Done
-def remove_adviser(student_list: list[Student]):
+def remove_adviser(adviser_list: list[Advisor]):
     """
     Gets a student ID and removes that student from student_list
     """
