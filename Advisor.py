@@ -40,10 +40,10 @@ class Advisor(Person):
         return self.__advisees
 
     # ID Setter/Getter
-    def set_id(self, new_id):
+    def set_advisor_id(self, new_id):
         self.__advisor_id = new_id
 
-    def get_id(self):
+    def get_advisor_id(self):
         return self.__advisor_id
 
     def __str__(self):

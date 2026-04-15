@@ -12,7 +12,7 @@ from Person import Person
 from Student import Student
 from Date import Date
 from Phone import Phone
-
+from Advisor import Advisor
 
 # Functions for managing students
 def find_student_id(student_list: list[Student]):
@@ -417,13 +417,40 @@ def edit_info(student_list: list[Student]):
 
         print("Changes successfully made.")
 
-# Functions for managing advisors
-# For storage, can either modify LinkedList to take Advisors and Courses (not ideal)
-# OR add comparison operators to Advisor and Course separately (probably better)
-
 # Main sub-menus
 
+# Functions for managing advisors
 #Adviser Menu
+def find_advisor_id(advisor_list: list[Advisor]):
+    """
+    Returns the index of a student in student_list, searching by student_id
+    Returns -1 if index not found
+    Used for editing, removing, and displaying
+    """
+    ids = [
+        advisor.get_advisor_id()
+        for advisor in advisor_list
+    ]
+
+    # Display students
+    print("ID: NAME")
+    for (index, advisor_id) in enumerate(ids):
+        advisor = advisor_list[index]
+        print(f"{advisor_id}: {advisor.get_name_last()}, {advisor.get_name_first()} {advisor.get_name_middle()}")
+
+    # Get and validate student
+    while True:
+        try:
+            target_id = int(input("Enter the id of the advisor: "))
+            index = ids.index(target_id)
+
+            return index
+        except ValueError:
+            print("ID not found.")
+            continue
+
+    return -1 # In case something breaks
+
 def adviser_menu(adviser_list: list[Person]):
     while True:
         print("\nHello Adviser! Please pick an option by inputting the number assigned to it: \n")
@@ -602,7 +629,7 @@ def display_adviser(student_list: list[Student]):
     print(student_list[student_index])
 
 
-# Functions for editing students
+# Functions for editing advisors
 def edit_adviser(student: Student):
     pass
 
