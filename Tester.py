@@ -13,7 +13,7 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 from Advisor import Advisor
-
+from LinkedList import LinkedList
 
 # Functions for managing students
 def find_student_id(student_list: list[Student]):
@@ -45,7 +45,6 @@ def find_student_id(student_list: list[Student]):
             continue
 
     return -1  # In case something breaks
-
 
 def create_student():
     """
@@ -120,7 +119,6 @@ def create_student():
     print("Student Added Successfully")
     return unified_student_info
 
-
 def create_example_students():
     """
     Statically creates and returns two example students for easy testing
@@ -159,7 +157,6 @@ def create_example_students():
 
     return example_student1, example_student2
 
-
 def remove_student(student_list: list[Student]):
     """
     Gets a student ID and removes that student from student_list
@@ -170,14 +167,12 @@ def remove_student(student_list: list[Student]):
         student_list.remove(student_list[student_index])
         print("Student Successfully Removed")
 
-
 def display_student(student_list: list[Student]):
     """
     Displays the information of a student in student_list
     """
     student_index = find_student_id(student_list)
     print(student_list[student_index])
-
 
 # Functions for editing students
 def edit_name(student: Student):
@@ -205,7 +200,6 @@ def edit_name(student: Student):
             student.set_name_last(new_name_last)
         elif new_input == 4:
             break
-
 
 def edit_address(student: Student):
     """
@@ -241,7 +235,6 @@ def edit_address(student: Student):
         elif new_input == 6:
             break
 
-
 def edit_emails(student: Student):
     """
     Smaller function for editing student emails
@@ -275,7 +268,6 @@ def edit_emails(student: Student):
             case _:
                 print("Invalid Action.")
                 continue
-
 
 def edit_phones(student: Student):
     """
@@ -311,7 +303,6 @@ def edit_phones(student: Student):
                 print("Invalid Action.")
                 continue
 
-
 def edit_date(date: Date, date_type: str):
     """
     Smaller function for editing dates
@@ -337,7 +328,6 @@ def edit_date(date: Date, date_type: str):
         elif new_input == 4:
             break
 
-
 def edit_major(student: Student):
     """
     Smaller function for editing student majors
@@ -349,8 +339,7 @@ def edit_major(student: Student):
 
     print(f"Major changed to {new_major}")
 
-
-def edit_info(student_list: list[Student]):
+def edit_student_info(student_list: list[Student]):
     """
     Allows for editing of all student info
     """
@@ -429,37 +418,7 @@ def edit_info(student_list: list[Student]):
 
         print("Changes successfully made.")
 
-
-# Main sub-menus
-
 # Functions for managing advisors
-# Adviser Menu
-def adviser_menu(adviser_list: list[Person]):
-    while True:
-        print("\nHello Adviser! Please pick an option by inputting the number assigned to it: \n")
-        print(
-            "1. Add An Adviser\n"
-            "2. Edit Advisor Info\n"
-            "3. Remove A Student\n"
-            "4. Display Adviser Info\n"
-            "5. Exit\n"
-        )
-        user_input = int(input("Enter Option: "))
-
-        if user_input == 1:  # Add student
-            adviser_list.append(create_adviser())
-
-        elif user_input == 2:  # Edit student
-            edit_info(adviser_list)
-
-        elif user_input == 3:  # Remove student
-            remove_adviser(adviser_list)
-
-        elif user_input == 4:  # Display student
-            display_adviser(adviser_list)
-
-
-#
 def find_advisor_id(advisor_list: list[Advisor]):
     """
     Returns the index of a student in student_list, searching by student_id
@@ -490,15 +449,15 @@ def find_advisor_id(advisor_list: list[Advisor]):
 
     return -1  # In case something breaks
 
-def create_adviser():
+def create_advisor():
     """
-    Creates and returns a new Student to be added.
+    Creates and returns a new Advisor to be added.
     """
     # Name
     name_first = input("Enter first name: ")
     name_middle = input("Enter middle name: ")
     name_last = input("Enter last name: ")
-    adviser_id = int(input("Enter adviser ID: "))
+    advisor_id = int(input("Enter advisor ID: "))
 
     # Street
     street_address = input("Enter street address: ")
@@ -546,18 +505,17 @@ def create_adviser():
     advisees: LinkedList
 
     # Creation
-    unified_adviser_info = Advisor(adviser_id, name_first, name_last, name_middle, unified_mailing_address,
+    unified_advisor_info = Advisor(advisor_id, name_first, name_last, name_middle, unified_mailing_address,
                                    email_list, phone_list, unified_birth_day, advisor_title, department, advisees)
-    print("Adviser Added Successfully")
-    return unified_adviser_info
+    print("advisor Added Successfully")
+    return unified_advisor_info
 
-
-def create_example_adviser():
+def create_example_advisor():
     """
     Statically creates and returns two example students for easy testing
     """
 
-    example_adviser1 = Advisor(
+    example_advisor1 = Advisor(
         54321, "Lex", "Guo", "",
         MailingAddress("123 Street", "City 1", "State 1", 12345, "Home"),
         [
@@ -572,7 +530,7 @@ def create_example_adviser():
         "English",
         "[Add avisees here}"
     )
-    example_adviser2 = Advisor(
+    example_advisor2 = Advisor(
         67890, "Joao", "Dias", "",
         MailingAddress("987 Street", "City 2", "State 2", 98765, "Home"),
         [
@@ -588,39 +546,32 @@ def create_example_adviser():
         "[Add avisees here}"
     )
 
-    return example_adviser1, example_adviser2
-
+    return example_advisor1, example_advisor2
 
 # Not Done
-def remove_adviser(adviser_list: list[Advisor]):
+def remove_advisor(advisor_list: list[Advisor]):
     """
     Gets a student ID and removes that student from student_list
     """
-    student_index = find_student_id(student_list)
+    student_index = find_advisor_id(advisor_list)
     confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
     if confirmation == "y":
-        student_list.remove(student_list[student_index])
+        advisor_list.remove(advisor_list[student_index])
         print("Student Successfully Removed")
 
-
 # Not Done
-def display_adviser(student_list: list[Student]):
+def display_advisor(advisor_list: list[Advisor]):
     """
     Displays the information of a student in student_list
     """
-    student_index = find_student_id(student_list)
-    print(student_list[student_index])
-
+    advisor_index = find_advisor_id(advisor_list)
+    print(advisor_list[advisor_index])
 
 # Functions for editing advisors
-def edit_adviser(student: Student):
+def edit_advisor_info(advisor_list: list[Advisor]):
     pass
 
-
-def edit_info(student_list: list[Student]):
-    pass
-
-
+# Sub-menus
 def student_menu(student_list: list[Student]):
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
@@ -637,7 +588,7 @@ def student_menu(student_list: list[Student]):
             student_list.append(create_student())
 
         elif user_input == 2:  # Edit student
-            edit_info(student_list)
+            edit_student_info(student_list)
 
         elif user_input == 3:  # Remove student
             remove_student(student_list)
@@ -652,28 +603,52 @@ def student_menu(student_list: list[Student]):
         else:
             print("Invalid Number. Please Try Again")
 
+def advisor_menu(advisor_list: list[Advisor]):
+    while True:
+        print("\nHello advisor! Please pick an option by inputting the number assigned to it: \n")
+        print(
+            "1. Add An advisor\n"
+            "2. Edit Advisor Info\n"
+            "3. Remove A Student\n"
+            "4. Display advisor Info\n"
+            "5. Exit\n"
+        )
+        user_input = int(input("Enter Option: "))
+
+        if user_input == 1:  # Add student
+            advisor_list.append(create_advisor())
+
+        elif user_input == 2:  # Edit student
+            edit_advisor_info(advisor_list)
+
+        elif user_input == 3:  # Remove student
+            remove_advisor(advisor_list)
+
+        elif user_input == 4:  # Display student
+            display_advisor(advisor_list)
 
 # Main and running
 def main():
     # List of Student Info
     student_list = []
-    adviser_list = []
+    advisor_list = []
 
     # Add examples
     s1, s2 = create_example_students()
     student_list.append(s1)
     student_list.append(s2)
-    s3, s4 = create_example_adviser()
-    adviser_list.append(s3)
-    adviser_list.append(s4)
+
+    s3, s4 = create_example_advisor()
+    advisor_list.append(s3)
+    advisor_list.append(s4)
 
     # TO DO: Choose between student and advisor menus
-    User_Choice = int(input("Hello! Please Choose Whether You Are A Student Or Adviser\n"
-                            "Press 1 for Student, 2 for Adviser: "))
-    if User_Choice == 1:
+    user_choice = int(input("Hello! Please Choose Whether You Are A Student Or advisor\n"
+                            "Press 1 for Student, 2 for advisor: "))
+    if user_choice == 1:
         student_menu(student_list)
-    elif User_Choice == 2:
-        adviser_menu(adviser_list)
+    elif user_choice == 2:
+        advisor_menu(advisor_list)
 
 
 if __name__ == '__main__':
