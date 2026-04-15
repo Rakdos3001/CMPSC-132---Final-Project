@@ -13,6 +13,7 @@ from Student import Student
 from Date import Date
 from Phone import Phone
 
+
 # Functions for managing students
 def find_student_id(student_list: list[Student]):
     """
@@ -421,7 +422,191 @@ def edit_info(student_list: list[Student]):
 # OR add comparison operators to Advisor and Course separately (probably better)
 
 # Main sub-menus
-# TO DO: implement advisor menu
+
+#Adviser Menu
+def adviser_menu(adviser_list: list[Person]):
+    while True:
+        print("\nHello Adviser! Please pick an option by inputting the number assigned to it: \n")
+        print(
+            "1. Add An Adviser\n"
+            "2. Edit Advisor Info\n"
+            "3. Remove A Student\n"
+            "4. Display Adviser Info\n"
+            "5. Exit\n"
+        )
+        user_input = int(input("Enter Option: "))
+
+        if user_input == 1:  # Add student
+            adviser_list.append(create_adviser())
+
+        elif user_input == 2:  # Edit student
+            edit_info(adviser_list)
+
+        elif user_input == 3:  # Remove student
+            remove_adviser(adviser_list)
+
+        elif user_input == 4:  # Display student
+            display_adviser(adviser_list)
+
+#Haven't Finished Yet
+def find_adviser_id(student_list: list[Student]):
+    """
+    Returns the index of a student in student_list, searching by student_id
+    Returns -1 if index not found
+    Used for editing, removing, and displaying
+    """
+    ids = [
+        student.get_student_id()
+        for student in student_list
+    ]
+
+    # Display students
+    print("ID: NAME")
+    for (index, student_id) in enumerate(ids):
+        student = student_list[index]
+        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
+
+    # Get and validate student
+    while True:
+        try:
+            target_id = int(input("Enter the id of the student: "))
+            index = ids.index(target_id)
+
+            return index
+        except ValueError:
+            print("ID not found.")
+            continue
+
+    return -1  # In case something breaks
+
+
+def create_adviser():
+    """
+    Creates and returns a new Student to be added.
+    """
+    # Name
+    name_first = input("Enter first name: ")
+    name_middle = input("Enter middle name: ")
+    name_last = input("Enter last name: ")
+    adviser_id = int(input("Enter adviser ID: "))
+
+    # Street
+    street_address = input("Enter street address: ")
+    city_name = input("Enter city: ")
+    state = input("Enter state: ")
+    zip_code = int(input("Enter ZIP code: "))
+    mailing_type = input("Enter address type (Permanent, Local, etc): ")
+    unified_mailing_address = MailingAddress(street_address, city_name, state, zip_code, mailing_type)
+
+    # Email Address
+    email_list = []
+    while True:
+        email_address = input("Enter email address: ")
+        email_type = input("Enter email type (School, Work, etc.): ")
+
+        unified_email = EmailAddress(email_address, email_type)
+        email_list.append(unified_email)
+
+        ending1 = input("Do you want to enter another? (Type y/N): ").lower()
+        if ending1 != "y":
+            break
+
+    # Phone Number
+    phone_list = []
+    while True:
+        phone_number = input("Enter phone number: ")
+        phone_type = input("Enter phone type (Cell, Home, Office): ")
+
+        unified_phone = Phone(phone_number, phone_type)
+        phone_list.append(unified_phone)
+
+        ending2 = input("Do you want to enter another? (Type y/N): ").lower()
+        if ending2 != "y":
+            break
+
+    # Birthday
+    birth_month = int(input("Enter birth month: "))
+    birth_day = int(input("Enter birth day: "))
+    birth_year = int(input("Enter birth year: "))
+    unified_birth_day = Date(birth_year, birth_month, birth_day)
+
+
+    # Creation
+    unified_adviser_info = Student(student_id, name_first, name_last, name_middle, unified_mailing_address,
+                                   email_list, phone_list, unified_birth_day, unified_enrollment_date,
+                                   unified_starting_semester_date, major)
+    print("Adviser Added Successfully")
+    return unified_adviser_info
+
+#Change Values For Later
+def create_example_adviser():
+    """
+    Statically creates and returns two example students for easy testing
+    """
+
+    example_student1 = Student(
+        12345, "Lex", "Guo", "",
+        MailingAddress("123 Street", "City 1", "State 1", 12345, "Home"),
+        [
+            EmailAddress("example1@psu.edu", "School"),
+            EmailAddress("example1@gmail.com", "Personal")
+        ],
+        [
+            Phone("111-222-3333", "Cell")
+        ],
+        Date(2006, 1, 1),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Computer Science"
+    )
+    example_student2 = Student(
+        98765, "Joao", "Dias", "",
+        MailingAddress("987 Street", "City 2", "State 2", 98765, "Home"),
+        [
+            EmailAddress("example2@psu.edu", "School"),
+            EmailAddress("example2@work.com", "Work")
+        ],
+        [
+            Phone("999-888-7777", "Home")
+        ],
+        Date(2007, 12, 12),
+        Date(2025, 1, 1),
+        Date(2026, 1, 1),
+        "Computer Science"
+    )
+
+    return example_student1, example_student2
+
+#Not Done
+def remove_adviser(student_list: list[Student]):
+    """
+    Gets a student ID and removes that student from student_list
+    """
+    student_index = find_student_id(student_list)
+    confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
+    if confirmation == "y":
+        student_list.remove(student_list[student_index])
+        print("Student Successfully Removed")
+
+#Not Done
+def display_adviser(student_list: list[Student]):
+    """
+    Displays the information of a student in student_list
+    """
+    student_index = find_student_id(student_list)
+    print(student_list[student_index])
+
+
+# Functions for editing students
+def edit_adviser(student: Student):
+    pass
+
+
+def edit_info(student_list: list[Student]):
+    pass
+
+
+
 def student_menu(student_list: list[Student]):
     while True:
         print("\nHello and Welcome! Please pick an option by inputting the number assigned to it: \n")
@@ -457,6 +642,7 @@ def student_menu(student_list: list[Student]):
 def main():
     # List of Student Info
     student_list = []
+    adviser_list = []
 
     # Add examples
     s1, s2 = create_example_students()
@@ -464,7 +650,13 @@ def main():
     student_list.append(s2)
 
     # TO DO: Choose between student and advisor menus
-    student_menu(student_list)
+    User_Choice = int(input("Hello! Please Choose Whether You Are A Student Or Adviser\n"
+                        "Press 1 for Student, 2 for Adviser: "))
+    if User_Choice == 1:
+        student_menu(student_list)
+    elif User_Choice == 2:
+        adviser_menu(adviser_list)
+
 
 
 if __name__ == '__main__':
