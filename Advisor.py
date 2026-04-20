@@ -9,9 +9,9 @@ from LinkedList import LinkedList
 # Course class
 class Advisor(Person):
     #Constructor
-    def __init__(self, advisor_id: int, name_first: str, name_last: str, name_middle: str = None,
+    def __init__(self, advisor_id: int, name_first: str = None, name_last: str = None, name_middle: str = None,
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
-                 advisor_title: str = None, department: str = None, advisees: LinkedList = None):
+                 advisor_title: str = None, department: str = None, advisees: LinkedList = LinkedList()):
         Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
         self.__advisor_id = advisor_id
         self.__advisor_title = advisor_title
