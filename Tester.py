@@ -42,7 +42,7 @@ def find_student(student_list: list[Student]):
             print("ID not found.")
             continue
 
-    return Student(-1, "Error", "Error")  # In case something breaks
+    return Student(-1)  # In case something breaks
 
 def create_student():
     """
@@ -119,7 +119,7 @@ def create_student():
 
 def create_example_students(student_list: list[Student]):
     """
-    Statically creates and returns two example students for easy testing
+    Statically creates and returns example students for easy testing
     """
     example_courses = LinkedList()
     example_courses.append(
@@ -224,10 +224,10 @@ def remove_student(student_list: list[Student]):
     Gets a student ID and removes that student from student_list
     """
     student = find_student(student_list)
-    confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
+    confirmation = input("Are you sure you wish to delete? [y/N]: ").lower()
     if confirmation == "y":
         student_list.remove(student)
-        print("Student Successfully Removed")
+        print("Student successfully removed")
 
 def display_student(student_list: list[Student]):
     """
@@ -401,6 +401,7 @@ def edit_major(student: Student):
 
     print(f"Major changed to {new_major}")
 
+# Add course edit
 def edit_student_info(student_list: list[Student]):
     """
     Allows for editing of all student info
@@ -491,13 +492,13 @@ def find_advisor(advisor_list: list[Advisor]):
         for advisor in advisor_list
     ]
 
-    # Display students
+    # Display advisors
     print("ID: NAME")
     for (index, advisor_id) in enumerate(ids):
         advisor = advisor_list[index]
         print(f"{advisor_id}: {advisor.get_name_last()}, {advisor.get_name_first()} {advisor.get_name_middle()}")
 
-    # Get and validate student
+    # Get and validate advisor
     while True:
         try:
             target_id = int(input("Enter the id of the advisor: "))
@@ -508,7 +509,7 @@ def find_advisor(advisor_list: list[Advisor]):
             print("ID not found.")
             continue
 
-    return Advisor(-1, "Error", "Error")  # In case something breaks
+    return Advisor(-1)  # In case something breaks
 
 def create_advisor(student_list: list[Student]):
     """
@@ -583,7 +584,7 @@ def create_advisor(student_list: list[Student]):
 
 def create_example_advisor(advisor_list: list[Advisor]):
     """
-    Statically creates and returns two example students for easy testing
+    Statically creates and returns example advisors for easy testing
     """
     example_advisor1 = Advisor(
         54321, "Marie", "White", "",
@@ -619,35 +620,75 @@ def create_example_advisor(advisor_list: list[Advisor]):
     advisor_list.append(example_advisor1)
     advisor_list.append(example_advisor2)
 
-# Not Done
 def remove_advisor(advisor_list: list[Advisor]):
     """
-    Gets a student ID and removes that student from student_list
+    Removes an advisor from advisor_list
     """
     advisor = find_advisor(advisor_list)
-    confirmation = input("Are you sure you wish to delete? (Type y/N): ").lower()
+    confirmation = input("Are you sure you wish to delete? [y/N]: ").lower()
     if confirmation == "y":
         advisor_list.remove(advisor)
-        print("Student Successfully Removed")
+        print("Advisor successfully removed")
 
-# Not Done
 def display_advisor(advisor_list: list[Advisor]):
     """
-    Displays the information of a student in student_list
+    Displays the information of an advisor in advisor_list
     """
     advisor = find_advisor(advisor_list)
     print(advisor)
 
 # Functions for editing advisors
-def edit_advisor_info(advisor_list: list[Advisor]):
+def find_advisee_id(advisor: Advisor):
+    """
+    Displays and prompts for advisee ids
+    Returns the id to use
+    """
+    advisees = advisor.get_advisees()
+
+    # Traverse and print ids and names
+    print("ID: NAME")
+    pos = advisees.get_head()
+
+    while pos is not None:
+        student: Student = pos.get_data()
+        print(f"{student.get_student_id()}: {student.get_name_last()}, "
+              f"{student.get_name_first()} {student.get_name_middle()}")
+
+    # Get and validate id
+    search_id = int(input("Enter the id of the advisee: "))
+    while advisees.search(Student(search_id)) is None:
+        print("Invalid id.")
+        search_id = int(input("Enter the id of the advisee: "))
+
+    return search_id
+
+def edit_advisor_info(advisor_list: list[Advisor], student_list: list[Student]):
     advisor = find_advisor(advisor_list)
 
-    print(
-        "Editing advisor: \n"
-        "1. Add advisee \n"
-        "2. Remove advisee \n"
-        "3. Exit"
-    )
+    while True:
+        print(
+            f"Editing advisor {advisor.get_name_last()}, {advisor.get_name_first()}, {advisor.get_name_middle()}: \n"
+            "\t1. Add advisee \n"
+            "\t2. Remove advisee \n"
+            "\t3. Exit"
+        )
+        action = int(input("Choose an action [1-3]: "))
+
+        match action:
+            case 1:
+                student = find_student(student_list)
+                advisor.get_advisees().append(student)
+                print("Advisee added.")
+            case 2:
+                # LinkedList searching is only done by id, so it will match any Student with the same id
+                student_id = find_advisee_id(advisor)
+                advisor.get_advisees().remove(Student(student_id))
+                print("Advisee removed.")
+            case 3:
+                print("Editing complete.")
+                break
+            case _:
+                print("Invalid")
 
 # Sub-menus
 def student_menu(student_list: list[Student]):

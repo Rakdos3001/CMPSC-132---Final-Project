@@ -6,7 +6,7 @@ from EmailAddress import EmailAddress
 
 class Person:
     # Constructor
-    def __init__(self, name_first: str, name_last: str, name_middle: str = None,
+    def __init__(self, name_first: str = None, name_last: str = None, name_middle: str = None,
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None):
         self.__name_first = name_first
         self.__name_last = name_last
