@@ -654,6 +654,8 @@ def find_advisee_id(advisor: Advisor):
         print(f"{student.get_student_id()}: {student.get_name_last()}, "
               f"{student.get_name_first()} {student.get_name_middle()}")
 
+        pos = pos.get_next()
+
     # Get and validate id
     search_id = int(input("Enter the id of the advisee: "))
     while advisees.search(Student(search_id)) is None:
@@ -739,7 +741,7 @@ def advisor_menu(advisor_list: list[Advisor], student_list: list[Student]):
             advisor_list.append(create_advisor(student_list))
 
         elif user_input == 2:  # Edit advisor
-            edit_advisor_info(advisor_list)
+            edit_advisor_info(advisor_list, student_list)
 
         elif user_input == 3:  # Remove advisor
             remove_advisor(advisor_list)
