@@ -1,7 +1,7 @@
 # Course class
 class Course:
     #Constructor
-    def __init__(self, course_number: str, semester_taken: str, delivery:str, status:str, grade:str):
+    def __init__(self, course_number: str, semester_taken: str = "", delivery: str = "", status: str = "", grade: str = ""):
         self.__course_number = course_number
         self.__semester_taken = semester_taken
         self.__delivery = delivery

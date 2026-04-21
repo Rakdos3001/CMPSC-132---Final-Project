@@ -410,7 +410,43 @@ def edit_major(student: Student):
 
     print(f"Major changed to {new_major}")
 
-# TODO: Add course edit
+def edit_courses(student: Student):
+    while True:
+        courses = student.get_courses()
+
+        print(
+            f"Managing courses for {student.get_name_full()}: \n"
+            "\t1. Add a course \n"
+            "\t2. Remove a course \n"
+            "\t3. Exit"
+        )
+
+        action = int(input("Choose an action [1-3]: "))
+        match action:
+            case 1: # Add
+                course_number = input("Enter the course number: ")
+                course_semester = input("Enter the semester the course was taken: ")
+                course_delivery = input("Enter the delivery method of the course: ")
+                course_status = input("Enter the current status of the course: ")
+                course_grade = input("Enter the student's grade in the course: ")
+                new_course = Course(course_number, course_semester, course_delivery, course_status, course_grade)
+
+                courses.append(new_course)
+            case 2: # Remove
+                print(courses.formatted_str(Course.get_course_number))
+                remove_id = input("Enter a course number to remove: ")
+
+                if courses.remove(Course(remove_id)) is not None:
+                    print("Course removed successfully.")
+                else:
+                    print("No course to remove")
+            case 3: # Exit
+                print("Courses modified successfully.")
+                break
+            case _: # Default
+                print("Invalid")
+                continue
+
 def edit_student_info(student_list: list[Student]):
     """
     Allows for editing of all student info
@@ -483,7 +519,7 @@ def edit_student_info(student_list: list[Student]):
         elif user_choice == 8:
             edit_major(student)
         elif user_choice == 9:
-            pass
+            edit_courses(student)
 
         # End
         elif user_choice == 10:
