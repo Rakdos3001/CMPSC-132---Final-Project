@@ -6,7 +6,7 @@ from EmailAddress import EmailAddress
 
 class Person:
     # Constructor
-    def __init__(self, name_first: str = None, name_last: str = None, name_middle: str = None,
+    def __init__(self, name_first: str = "", name_last: str = "", name_middle: str = "",
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None):
         self.__name_first = name_first
         self.__name_last = name_last
@@ -39,6 +39,12 @@ class Person:
         self.__birth_date = birth_date
 
     # Getters
+    def get_name_full(self):
+        return (
+            f"{self.__name_first} {self.__name_middle} {self.__name_last}" if self.__name_middle != ""
+            else f"{self.__name_first} {self.__name_last}"
+        )
+
     def get_name_first(self):
         return self.__name_first
 

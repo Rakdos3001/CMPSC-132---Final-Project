@@ -9,7 +9,7 @@ from LinkedList import LinkedList
 # Course class
 class Advisor(Person):
     #Constructor
-    def __init__(self, advisor_id: int, name_first: str = None, name_last: str = None, name_middle: str = None,
+    def __init__(self, advisor_id: int, name_first: str = "", name_last: str = "", name_middle: str = "",
                  address: MailingAddress = None, emails: list[EmailAddress] = None, phones: list[Phone] = None, birth_date: Date = None,
                  advisor_title: str = None, department: str = None, advisees: LinkedList = LinkedList()):
         Person.__init__(self, name_first, name_last, name_middle, address, emails, phones, birth_date)
@@ -47,15 +47,8 @@ class Advisor(Person):
         return self.__advisor_id
 
     def __str__(self):
-        # Traverse advisees list and turn into a string
-        advisee_str = ""
-        pos = self.__advisees.get_head()
-        while pos is not None:
-            student: Student = pos.get_data()
-            advisee_str += f"{student.get_name_first()} {student.get_name_last()}, "
-
-            pos = pos.get_next()
-        advisee_str = advisee_str.strip(", ")
+        # Turns formats advisee linkedList into a string
+        advisee_str = self.__advisees.formatted_str(Student.get_name_full)
 
         return (
             Person.__str__(self) + "\n"

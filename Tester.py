@@ -29,7 +29,7 @@ def find_student(student_list: list[Student]):
     print("ID: NAME")
     for (index, student_id) in enumerate(ids):
         student = student_list[index]
-        print(f"{student_id}: {student.get_name_last()}, {student.get_name_first()} {student.get_name_middle()}")
+        print(f"{student_id}: {student.get_name_full()}")
 
     # Get and validate student
     while True:
@@ -126,7 +126,7 @@ def create_example_students(student_list: list[Student]):
         Course("MATH 1", "Fall 25", "In-Person", "In-Progress", "A")
     )
     example_courses.append(
-        Course("ENGL 2", "Fall 25", "In-Person", "In-Progress", "B")
+        Course("ENGLISH 2", "Fall 25", "In-Person", "In-Progress", "B")
     )
     example_courses.append(
         Course("CHEM 3", "Fall 25", "In-Person", "In-Progress", "C")
@@ -165,7 +165,7 @@ def create_example_students(student_list: list[Student]):
         example_courses
     )
     example_student3 = Student(
-        33333, "Jane", "Doe", "",
+        33333, "Jane", "Doe", "Liz",
         MailingAddress("333 Street", "City 3", "State 3", 33333, "Home"),
         [
             EmailAddress("example3@psu.edu", "School"),
@@ -181,7 +181,7 @@ def create_example_students(student_list: list[Student]):
         example_courses
     )
     example_student4 = Student(
-        44444, "John", "Doe", "",
+        44444, "John", "Doe", "Richard",
         MailingAddress("444 Street", "City 4", "State 4", 44444, "Home"),
         [
             EmailAddress("example4@psu.edu", "School"),
@@ -261,13 +261,13 @@ def edit_name(student: Student):
         )
         new_input = int(input("Enter the number of the name you'd like to change: "))
         if new_input == 1:
-            new_name_first = input("Enter New First name: ")
+            new_name_first = input("Enter new first name: ")
             student.set_name_first(new_name_first)
         elif new_input == 2:
-            new_name_middle = input("Enter New Middle name: ")
+            new_name_middle = input("Enter new middle name: ")
             student.set_name_middle(new_name_middle)
         elif new_input == 3:
-            new_name_last = input("Enter New Last name: ")
+            new_name_last = input("Enter new last name: ")
             student.set_name_last(new_name_last)
         elif new_input == 4:
             break
@@ -419,6 +419,7 @@ def edit_student_info(student_list: list[Student]):
     student = find_student(student_list)
 
     while True:
+        # Create formatted strings for displays
         email_str = "\n\t\t".join([
             str(email)
             for email in student.get_email_addresses()
@@ -427,6 +428,7 @@ def edit_student_info(student_list: list[Student]):
             str(phone)
             for phone in student.get_phones()
         ])
+        course_str = student.get_courses().formatted_str(Course.get_course_number)
 
         # Lists current information that can be updated
         print(
@@ -447,7 +449,8 @@ def edit_student_info(student_list: list[Student]):
             f"\t7. Starting Semester: {student.get_semester_start()}\n"
 
             f"\t8. Major: {student.get_major()}\n"
-            f"\t9. Exit"
+            f"\t9. Courses: {course_str}\n"
+            f"\t10. Exit"
         )
         user_choice = int(input("Enter the number of the info you'd like to change: "))
 
@@ -476,12 +479,14 @@ def edit_student_info(student_list: list[Student]):
         elif user_choice == 7:  # Start of semester
             edit_date(student.get_semester_start(), "Semester Start")
 
-        # Major
+        # Major and Courses
         elif user_choice == 8:
             edit_major(student)
+        elif user_choice == 9:
+            pass
 
         # End
-        elif user_choice == 9:
+        elif user_choice == 10:
             break
         else:
             print("Invalid action.")

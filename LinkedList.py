@@ -107,6 +107,27 @@ class LinkedList:
             # Special case: last item, inserts to end
             pos.set_next(new_node)
 
+    def formatted_str(self, function):
+        """
+        Returns a formatted version of the linkedList using function
+        Used when printing a class' default string wouldn't display well in the standard format
+        """
+        # Figured out how to do this with some experimentation
+
+        output_str = "["
+
+        # Traverse to end
+        pos = self.__head
+        while pos is not None:
+            # Printing each
+            output_str += f"{function(pos.get_data())} -> "
+            pos = pos.get_next()
+
+        # Formatting and return
+        output_str = output_str.strip(" -> ") + "]"
+
+        return output_str
+
     def __str__(self):
         output_str = "["
 
@@ -114,10 +135,10 @@ class LinkedList:
         pos = self.__head
         while pos is not None:
             # Printing each
-            output_str += f"{pos}, "
+            output_str += f"{pos} -> "
             pos = pos.get_next()
 
         # Formatting and return
-        output_str = output_str.strip(", ") + "]"
+        output_str = output_str.strip(" -> ") + "]"
 
         return output_str
