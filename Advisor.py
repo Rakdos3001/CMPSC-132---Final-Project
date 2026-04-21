@@ -61,5 +61,5 @@ class Advisor(Person):
             Person.__str__(self) + "\n"
             f"\tAdvisor Title: {self.__advisor_title}\n"
             f"\tDepartment: {self.__department}\n"
-            f"\tAdvisee: {advisee_str}\n"
+            f"\tAdvisees: {advisee_str}\n"
         )

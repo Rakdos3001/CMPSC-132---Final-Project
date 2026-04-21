@@ -219,14 +219,23 @@ def create_example_students(student_list: list[Student]):
     student_list.append(example_student4)
     student_list.append(example_student5)
 
-def remove_student(student_list: list[Student]):
+def remove_student(student_list: list[Student], advisor_list: list[Advisor]):
     """
     Gets a student ID and removes that student from student_list
     """
     student = find_student(student_list)
     confirmation = input("Are you sure you wish to delete? [y/N]: ").lower()
+
     if confirmation == "y":
+        # Remove student from the advisors' advisee list
+        for advisor in advisor_list:
+            advisees = advisor.get_advisees()
+            if advisees.search(student):
+                advisees.remove(student)
+
+        # Then remove from student_list
         student_list.remove(student)
+
         print("Student successfully removed")
 
 def display_student(student_list: list[Student]):
@@ -401,7 +410,7 @@ def edit_major(student: Student):
 
     print(f"Major changed to {new_major}")
 
-# Add course edit
+# TODO: Add course edit
 def edit_student_info(student_list: list[Student]):
     """
     Allows for editing of all student info
@@ -693,7 +702,7 @@ def edit_advisor_info(advisor_list: list[Advisor], student_list: list[Student]):
                 print("Invalid")
 
 # Sub-menus
-def student_menu(student_list: list[Student]):
+def student_menu(student_list: list[Student], advisor_list: list[Advisor]):
     while True:
         print("\nHello and welcome! Please pick an option by inputting the number assigned to it: \n")
         print(
@@ -712,7 +721,7 @@ def student_menu(student_list: list[Student]):
             edit_student_info(student_list)
 
         elif user_input == 3:  # Remove student
-            remove_student(student_list)
+            remove_student(student_list, advisor_list)
 
         elif user_input == 4:  # Display student
             display_student(student_list)
@@ -729,11 +738,11 @@ def advisor_menu(advisor_list: list[Advisor], student_list: list[Student]):
     while True:
         print(
             "\nHello advisor! Please pick an option by inputting the number assigned to it: \n"
-            "1. Add an advisor\n"
-            "2. Edit advisor info\n"
-            "3. Remove a student\n"
-            "4. Display advisor info\n"
-            "5. Exit\n"
+            "1. Add an advisor \n"
+            "2. Edit advisor info \n"
+            "3. Remove an advisor \n"
+            "4. Display advisor info \n"
+            "5. Exit \n"
         )
         user_input = int(input("Enter option: "))
 
@@ -785,7 +794,7 @@ def main():
         user_choice = int(input("Enter an action: "))
 
         if user_choice == 1:
-            student_menu(student_list)
+            student_menu(student_list, advisor_list)
         elif user_choice == 2:
             advisor_menu(advisor_list, student_list)
         elif user_choice == 3:
