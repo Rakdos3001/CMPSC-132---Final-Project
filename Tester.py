@@ -847,3 +847,187 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+SAMPLE RUN
+Shows off new Advisor and Course functionality
+
+What are you managing? 
+	1. Student 
+	2. Advisor 
+	3. Exit
+Enter an action: 1
+
+Hello and welcome! Please pick an option by inputting the number assigned to it: 
+
+1. Add a student
+2. Edit student info
+3. Remove student
+4. Display student
+5. Exit
+
+Enter Option: 2
+ID: NAME
+12345: Lex Guo
+98765: Joao Dias
+33333: Jane Liz Doe
+44444: John Richard Doe
+55555: Bob Brown
+Enter the id of the student: 12345
+This Is The Current Student Info:
+	1. Name: Lex  Guo 
+	2. Address: 123 Street, City 1, State 1, 12345 (Home)
+	3. Email Addresses: 
+		example1@psu.edu (School)
+		example1@gmail.com (Personal)
+	4. Phone Numbers: 
+		111-222-3333 (Cell)
+	5. Birthday: 1/1/2006
+	6. Enrollment Date: 1/1/2025
+	7. Starting Semester: 1/1/2026
+	8. Major: Computer Science
+	9. Courses: [MATH 1 -> ENGLISH 2 -> CHEM 3]
+	10. Exit
+Enter the number of the info you'd like to change: 9
+Managing courses for Lex Guo: 
+	1. Add a course 
+	2. Remove a course 
+	3. Exit
+Choose an action [1-3]: 1
+Enter the course number: CMPSC 132
+Enter the semester the course was taken: Spring 26
+Enter the delivery method of the course: In Person
+Enter the current status of the course: In Progress
+Enter the student's grade in the course: A
+Managing courses for Lex Guo: 
+	1. Add a course 
+	2. Remove a course 
+	3. Exit
+Choose an action [1-3]: 2
+[MATH 1 -> ENGLISH 2 -> CHEM 3 -> CMPSC 132]
+Enter a course number to remove: ENGLISH 2
+Course removed successfully.
+Managing courses for Lex Guo: 
+	1. Add a course 
+	2. Remove a course 
+	3. Exit
+Choose an action [1-3]: 3
+Courses modified successfully.
+Changes successfully made.
+This Is The Current Student Info:
+	1. Name: Lex  Guo 
+	2. Address: 123 Street, City 1, State 1, 12345 (Home)
+	3. Email Addresses: 
+		example1@psu.edu (School)
+		example1@gmail.com (Personal)
+	4. Phone Numbers: 
+		111-222-3333 (Cell)
+	5. Birthday: 1/1/2006
+	6. Enrollment Date: 1/1/2025
+	7. Starting Semester: 1/1/2026
+	8. Major: Computer Science
+	9. Courses: [MATH 1 -> CHEM 3 -> CMPSC 132]
+	10. Exit
+Enter the number of the info you'd like to change: 10
+
+Hello and welcome! Please pick an option by inputting the number assigned to it: 
+
+1. Add a student
+2. Edit student info
+3. Remove student
+4. Display student
+5. Exit
+
+Enter Option: 5
+Thank you for using our program!
+What are you managing? 
+	1. Student 
+	2. Advisor 
+	3. Exit
+Enter an action: 2
+
+Hello advisor! Please pick an option by inputting the number assigned to it: 
+1. Add an advisor 
+2. Edit advisor info 
+3. Remove an advisor 
+4. Display advisor info 
+5. Exit 
+
+Enter option: 2
+ID: NAME
+54321: White, Marie 
+67890: Li, Chris 
+Enter the id of the advisor: 54321
+Editing advisor White, Marie, : 
+	1. Add advisee 
+	2. Remove advisee 
+	3. Exit
+Choose an action [1-3]: 1
+ID: NAME
+12345: Lex Guo
+98765: Joao Dias
+33333: Jane Liz Doe
+44444: John Richard Doe
+55555: Bob Brown
+Enter the id of the student: 55555
+Advisee added.
+Editing advisor White, Marie, : 
+	1. Add advisee 
+	2. Remove advisee 
+	3. Exit
+Choose an action [1-3]: 2
+ID: NAME
+12345: Guo, Lex 
+98765: Dias, Joao 
+33333: Doe, Jane Liz
+55555: Brown, Bob 
+Enter the id of the advisee: 98765
+Advisee removed.
+Editing advisor White, Marie, : 
+	1. Add advisee 
+	2. Remove advisee 
+	3. Exit
+Choose an action [1-3]: 3
+Editing complete.
+
+Hello advisor! Please pick an option by inputting the number assigned to it: 
+1. Add an advisor 
+2. Edit advisor info 
+3. Remove an advisor 
+4. Display advisor info 
+5. Exit 
+
+Enter option: 4
+ID: NAME
+54321: White, Marie 
+67890: Li, Chris 
+Enter the id of the advisor: 54321
+White, Marie : 
+	DOB: 1/1/2006
+	Address: 123 Street, City 1, State 1, 12345 (Home) 
+	Emails: 
+		example1@psu.edu (School)
+		example1@gmail.com (Personal) 
+	Phones: 
+		111-222-3333 (Cell) 
+
+	Advisor Title: Professor
+	Department: English
+	Advisees: [Lex Guo -> Jane Liz Doe -> Bob Brown]
+
+
+Hello advisor! Please pick an option by inputting the number assigned to it: 
+1. Add an advisor 
+2. Edit advisor info 
+3. Remove an advisor 
+4. Display advisor info 
+5. Exit 
+
+Enter option: 5
+Thank you for using our program!
+What are you managing? 
+	1. Student 
+	2. Advisor 
+	3. Exit
+Enter an action: 3
+"""
