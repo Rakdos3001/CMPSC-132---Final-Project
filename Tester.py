@@ -413,9 +413,11 @@ def edit_major(student: Student):
 def edit_courses(student: Student):
     while True:
         courses = student.get_courses()
+        course_str = courses.formatted_str(Course.get_course_number)
 
         print(
             f"Managing courses for {student.get_name_full()}: \n"
+            f"Current courses: {course_str} \n"
             "\t1. Add a course \n"
             "\t2. Remove a course \n"
             "\t3. Exit"
@@ -716,10 +718,11 @@ def find_advisee_id(advisor: Advisor):
 
 def edit_advisor_info(advisor_list: list[Advisor], student_list: list[Student]):
     advisor = find_advisor(advisor_list)
-
+    advisee_str = advisor.get_advisees().formatted_str(Student.get_name_full)
     while True:
         print(
-            f"Editing advisor {advisor.get_name_last()}, {advisor.get_name_first()}, {advisor.get_name_middle()}: \n"
+            f"Editing advisor {advisor.get_name_full()}: \n"
+            f"Current advisees: {advisee_str} \n"
             "\t1. Add advisee \n"
             "\t2. Remove advisee \n"
             "\t3. Exit"
@@ -890,6 +893,7 @@ This Is The Current Student Info:
 	10. Exit
 Enter the number of the info you'd like to change: 9
 Managing courses for Lex Guo: 
+Current courses: [MATH 1 -> ENGLISH 2 -> CHEM 3] 
 	1. Add a course 
 	2. Remove a course 
 	3. Exit
@@ -900,6 +904,7 @@ Enter the delivery method of the course: In Person
 Enter the current status of the course: In Progress
 Enter the student's grade in the course: A
 Managing courses for Lex Guo: 
+Current courses: [MATH 1 -> ENGLISH 2 -> CHEM 3] 
 	1. Add a course 
 	2. Remove a course 
 	3. Exit
@@ -908,6 +913,7 @@ Choose an action [1-3]: 2
 Enter a course number to remove: ENGLISH 2
 Course removed successfully.
 Managing courses for Lex Guo: 
+Current courses: [MATH 1 -> ENGLISH 2 -> CHEM 3] 
 	1. Add a course 
 	2. Remove a course 
 	3. Exit
@@ -958,7 +964,8 @@ ID: NAME
 54321: White, Marie 
 67890: Li, Chris 
 Enter the id of the advisor: 54321
-Editing advisor White, Marie, : 
+Editing advisor Marie White: 
+Current advisees: [Lex Guo -> Joao Dias -> Jane Liz Doe] 
 	1. Add advisee 
 	2. Remove advisee 
 	3. Exit
@@ -971,7 +978,8 @@ ID: NAME
 55555: Bob Brown
 Enter the id of the student: 55555
 Advisee added.
-Editing advisor White, Marie, : 
+Editing advisor Marie White: 
+Current advisees: [Lex Guo -> Joao Dias -> Jane Liz Doe] 
 	1. Add advisee 
 	2. Remove advisee 
 	3. Exit
@@ -983,7 +991,8 @@ ID: NAME
 55555: Brown, Bob 
 Enter the id of the advisee: 98765
 Advisee removed.
-Editing advisor White, Marie, : 
+Editing advisor Marie White: 
+Current advisees: [Lex Guo -> Joao Dias -> Jane Liz Doe] 
 	1. Add advisee 
 	2. Remove advisee 
 	3. Exit
